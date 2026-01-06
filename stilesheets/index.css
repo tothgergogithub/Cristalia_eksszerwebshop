@@ -1,5 +1,14 @@
 footer{
     background-color: black;
     color: white;
-    height: 300px;
+    position: fixed;
+    text-align: center;
+    
+}
+footer p{
+    padding: 20px;
+    margin-bottom: 50px;
+    font-size: x-large;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
 }
