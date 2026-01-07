@@ -22,6 +22,14 @@ footer p {
     flex-direction: row;
 
 }
+.nav-item{
+    margin-left: 5px;
+    color: #000;
+}
+.navbar{
+    border-bottom: 1px black solid;
+    background-color: white !important;
+}
 
 #navba-dropdown-subsites {
     position: absolute !important;
@@ -35,10 +43,29 @@ footer p {
 }
 
 #logo-img {
-    width: 120px;
+    width: 105px;
+}
+.mb-2{
+    margin-bottom: 0rem !important;
+}
+.offcanvas-buttons{
+    width: 100%;
+
 }
 
-.btn-success {
+#offcanva-first-row .col-6{
+    padding: 2px;
+}
+.align-left .nav-link{
+    text-align: left !important;
+   
+}
+.offcanva-navbar-costume .nav-item{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.btn-primary {
     --bs-btn-color: #000000;
     --bs-btn-bg: #F6F1E9;
     --bs-btn-border-color: #F6F1E9;
