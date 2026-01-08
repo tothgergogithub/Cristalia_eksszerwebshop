@@ -7,12 +7,11 @@ footer {
     background: linear-gradient(180deg, rgba(79, 32, 13, 1) 30%, rgba(0, 0, 0, 1) 100%);
     color: white;
     text-align: center;
-
 }
 
 footer p {
     padding: 10px;
-    margin-bottom: 30px;
+    margin-bottom:10px;
     font-size: large;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -56,13 +55,18 @@ footer p {
 #offcanva-first-row .col-6{
     padding: 2px;
 }
-.align-left .nav-link{
+#offcanva-navbar-costume .nav-link{
     text-align: left !important;
-   
+    color: black;
 }
-.offcanva-navbar-costume .nav-item{
+#offcanva-navbar-costume .active{
+    --bs-nav-pills-link-active-bg: #F6F1E9;
+    --bs-nav-pills-border-radius: 0;
+}
+#offcanva-navbar-costume .nav-item{
     margin-left: 0px;
     margin-right: 0px;
+   
 }
 
 .btn-primary {
