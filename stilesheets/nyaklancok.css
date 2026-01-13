@@ -8,3 +8,9 @@
 #szurok{
     text-align: left;
 }
+.dropdown-menu{
+    width: 100%;
+}
+.dropdown-item{
+    text-align: center !important;
+}
