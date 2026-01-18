@@ -1,0 +1,90 @@
+body {
+    flex-direction: column;
+}
+
+footer {
+    background: #4F200D;
+    background: linear-gradient(180deg, rgba(79, 32, 13, 1) 30%, rgba(0, 0, 0, 1) 100%);
+    color: white;
+    text-align: center;
+}
+
+footer p {
+    padding: 10px;
+    margin-bottom:10px;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.navbar-nav {
+    flex-direction: row;
+
+}
+.nav-item{
+    margin-left: 5px;
+    color: #000;
+}
+.navbar{
+    border-bottom: 1px black solid;
+    background-color: white !important;
+}
+
+#navba-dropdown-subsites {
+    position: absolute !important;
+    padding-right: 2rem;
+    width: 30rem;
+}
+#navba-dropdown-subsites li{}
+
+.navbar-nav li {
+    margin-left: 10px;
+}
+.nabar-brand{
+    
+}
+#logo-img {
+    width: 40px;
+    margin-left: 10px;
+}
+.mb-2{
+    margin-bottom: 0rem !important;
+}
+.offcanvas-buttons{
+    width: 100%;
+
+}
+
+#offcanva-first-row .col-6{
+    padding: 2px;
+}
+#offcanva-navbar-costume .nav-link{
+    text-align: left !important;
+    color: black;
+}
+#offcanva-navbar-costume .active{
+    --bs-nav-pills-link-active-bg: #F6F1E9;
+    --bs-nav-pills-border-radius: 0;
+}
+#offcanva-navbar-costume .nav-item{
+    margin-left: 0px;
+    margin-right: 0px;
+   
+}
+
+.btn-primary {
+    --bs-btn-color: #000000;
+    --bs-btn-bg: #F6F1E9;
+    --bs-btn-border-color: #F6F1E9;
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: #fae4c4;
+    --bs-btn-hover-border-color: #000;
+    --bs-btn-focus-shadow-rgb: 60, 153, 110;
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #e2d0b6;
+    --bs-btn-active-border-color: #13653f;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #F6F1E9;
+    --bs-btn-disabled-border-color: #F6F1E9;
+}
