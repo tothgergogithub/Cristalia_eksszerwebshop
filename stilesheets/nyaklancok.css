@@ -18,3 +18,6 @@ main{
     background: #ebd3a9;
     background: linear-gradient(180deg, rgba(235, 211, 169, 1) 0%, rgba(79, 32, 13, 1) 100%);
 }
+.card{
+    margin-bottom: 50px;
+}
