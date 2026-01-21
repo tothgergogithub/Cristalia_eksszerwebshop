@@ -1,0 +1,44 @@
+
+#paybutton-container{
+    height: 25rem;
+}
+#paybutton{
+    width: 100%;
+    text-align: center;
+    border-radius: 15px;
+    height: 3rem;
+    font-weight: 600;
+}
+#fizetendo-osszeg-container{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    border: grey solid 1px;
+    height: 3rem;
+    margin-top: 1rem;
+}
+#fizetendo-osszeg-container p{
+    margin-bottom: 0px;
+}
+#penznem-es-osszeg{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+#penznem-es-osszeg p{
+    padding-left: 2px;
+}
+#fizetes-section{
+    height: 20rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px black solid;
+}
+#paybutton-bottom-margin{
+    margin-bottom: 2rem;
+    
+}
