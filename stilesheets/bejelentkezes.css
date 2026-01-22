@@ -1,4 +1,9 @@
-
+body {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #f7efe5, #c4a899, #5b2c16);
+    display: flex;
+    flex-direction: column;
+}
 .topbar {
     padding: 10px 30px;
     background: rgba(255,255,255,0.6);
