@@ -8,6 +8,9 @@
 #szurok{
     text-align: left;
 }
+#szuro{
+    margin-bottom: 50px;
+}
 .dropdown-menu{
     width: 100%;
 }
@@ -20,4 +23,8 @@ main{
 }
 .card{
     margin-bottom: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.kartyakep{
+    height: 220px;
 }
