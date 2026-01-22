@@ -42,11 +42,18 @@
     margin-bottom: 2rem;
     
 }
+#w1155{
+    max-height: 15rem; 
+    
+    overflow: hidden;
+ }
+.item-image{
+    
+    width: 15rem;
+}
 @media screen and (min-width: 1155px){
 
-    #w1155{
-       max-height: 15rem; 
-    }
+    
 }
 
 /*
