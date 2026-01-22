@@ -4,23 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../stilesheets/navbar-footer-style.css">
+  <link rel="stylesheet" href="../stilesheets/index.css">
     <link rel="stylesheet" href="../stilesheets/bejelentkezes.css">
     <link rel="stylesheet" href="../stilesheets/regisztracio.css">
     <title>Regisztráció</title>
 </head>
 <body>
-    <div class="topbar">
-        <div class="fw-bold text-warning">
-            <span>⭐ Cristalia</span>
-        </div>
-        <div>
-            <a href="#" class="me-3 text-dark text-decoration-none">Dropdown</a>
-            <a href="#" class="me-2 text-dark text-decoration-none">Reg</a>
-            <a href="#" class="text-dark text-decoration-none">Log</a>
-        </div>
-    </div>
+    <header class="">
+        <nav class="navbar navbar-expand-md bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="../img/logo/diamond_free.png" alt="Cristalia" id="logo-img">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas"
+              aria-controls="menuOffcanvas" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Lehetőségek
+                  </a>
+                  <ul class="dropdown-menu" id="navba-dropdown-subsites">
     
-    <!-- Login -->
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <li class="dropdown-item" href="#" role="button">Nyakláncok</li>
+                        <li class="dropdown-item" href="#" role="button">Karkötők</li>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <li href="#" class="dropdown-item" role="button">Gyűrűk</li>
+                        <li href="#" class="dropdown-item" role="button">Fülbevalók</li>
+                      </div>
+                    </div>
+    
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" role="button">Rólunk
+                  </a>
+                </li>
+              </ul>
+              <form class="justify-content-end">
+                <button class="btn btn-primary me-2" type="button">Regisztráció</button>
+                <button class="btn btn-primary me-2" type="button">Bejelentkezés</button>
+    
+              </form>
+            </div>
+          </div>
+        </nav>
+    
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="menuOffcanvas" aria-labelledby="menuOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="menuOffcanvasLabel">Cristalia Ékszer Webshop</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+    
+            <div class="container-fluid">
+              <div class="row" id="offcanva-first-row">
+                <div class="col-6">
+                  <button type="button" class="btn btn-primary offcanvas-buttons">Regisztráció</button>
+                </div>
+                <div class="col-6">
+                  <button type="button" class="btn btn-primary offcanvas-buttons">Bejelentkezés</button>
+                </div>
+              </div>
+            </div>
+            <hr class="divider">
+            <ul class="nav nav-pills nav-fill flex-column align-left" id="offcanva-navbar-costume">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Főoldal</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Nyakláncok</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Karkötők</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Gyűrűk</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#">Fülbevalók</a>
+              </li>
+              <hr class="driver">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Rólunk</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+    
+   
     <div class="container d-flex justify-content-center align-items-center flex-grow-1">
         <div class="login-card">
             <h5>Regisztráció:</h5>
@@ -58,7 +140,7 @@
         </div>
     </div>
     
-    <!-- Footer -->
+    
     <footer>
         <div>Elérhetőségek</div>
         <div>email: cristalia@gmail.com</div>

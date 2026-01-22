@@ -38,14 +38,8 @@ body {
     background-color: #e08e0b;
 }
 
-footer {
-    margin-top: auto;
-    text-align: center;
-    padding: 20px;
-    color: #fff;
-    font-size: 14px;
-}
+
 main{
-    background: #0f0d09;
+    background:  #ebd3a9;
     background: linear-gradient(180deg, rgba(235, 211, 169, 1) 0%, rgba(79, 32, 13, 1) 100%);
 }

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../stilesheets/navbar-footer-style.css">
+    <link rel="stylesheet" href="../stilesheets/kosar.css">
+
+
+    <title>Kosár</title>
+</head>
+
+<body>
+    <header class="">
+        <nav class="navbar navbar-expand-md bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="../img/logo/diamond_free.png" alt="Cristalia" id="logo-img">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas"
+                    aria-controls="menuOffcanvas" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Lehetőségek
+                            </a>
+                            <ul class="dropdown-menu" id="navba-dropdown-subsites">
+
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <li class="dropdown-item" href="#" role="button">Nyakláncok</li>
+                                        <li class="dropdown-item" href="#" role="button">Karkötők</li>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <li href="#" class="dropdown-item" role="button">Gyűrűk</li>
+                                        <li href="#" class="dropdown-item" role="button">Fülbevalók</li>
+                                    </div>
+                                </div>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" role="button">Rólunk
+                            </a>
+                        </li>
+                    </ul>
+                    <form class="justify-content-end">
+                        <button class="btn btn-primary me-2" type="button">Regisztráció</button>
+                        <button class="btn btn-primary me-2" type="button">Bejelentkezés</button>
+
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="menuOffcanvas" aria-labelledby="menuOffcanvasLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="menuOffcanvasLabel">Cristalia Ékszer Webshop</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+
+                <div class="container-fluid">
+                    <div class="row" id="offcanva-first-row">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-primary offcanvas-buttons">Regisztráció</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-primary offcanvas-buttons">Bejelentkezés</button>
+                        </div>
+                    </div>
+                </div>
+                <hr class="divider">
+                <ul class="nav nav-pills nav-fill flex-column align-left" id="offcanva-navbar-costume">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Főoldal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Nyakláncok</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Karkötők</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gyűrűk</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Fülbevalók</a>
+                    </li>
+                    <hr class="driver">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Rólunk</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-fluid">
+        <section class="row" id="fizetes-section">
+            <!-- Fizetnietés gomb -->
+            <div class=" col-12 my-2">
+
+
+                    <div class="row" id="paybutton-bottom-margin">
+
+                        <div class="col-1 col-sm-3 col-md-4 col-lg-5"></div>
+                        <div class="col-10 col-sm-6 col-md-4 col-lg-2" ><button type="button" class="btn btn-success" id="paybutton">Megrendelés</button></div>
+                        <div class="col-1 col-sm-3 col-md-4 col-lg-5" ></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-3 col-lg-4"></div>
+                        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                            <div id="fizetendo-osszeg-container">
+                                <p>Fizetendő:</p>
+                                <div id="penznem-es-osszeg">
+
+                                    <p id="osszeg">1000000</p>
+                                    <p id="penznem">
+                                        HUF
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-2 col-md-3 col-lg-4"></div>
+                    </div>
+                </div>
+
+
+            
+        </section>
+        <section class="row">
+            <!--Termékek-->
+            <div class="col-12 my-2" id="product-template">
+
+                <div class="row">
+                    <div class="col-xl-1"></div>
+                    <div class="col-12 col-md-4">
+                        <div class="item-image">
+                            <img src="../img/fooldal/gyűrű.jpg" alt="" class="img-fluid" id="w1155">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-5 col-xl-4">
+                        <div>
+                            <p>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis, tempora doloremque. Commodi ipsam officia porro tempora quos placeat eaque dolor, quaerat consequuntur, impedit minus qui illo sequi accusantium? Sint, incidunt!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 col-xl-2">
+                        <div>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis architecto qui optio officia animi, in soluta cum quibusdam eveniet voluptas eos alias quas sunt labore quod enim rerum libero repudiandae?
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-1">
+
+                    </div>
+                </div>
+
+                <!--
+                <div class="my-2 side-1 kosar-elem">
+                    <div class="row">
+
+                        <div class="col-12 col-sm-4 col-lg-3 item-calls">
+                           <div class="termek-img"> 
+
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-5 col-lg-6 item-calls">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem blanditiis obcaecati minus recusandae at. Fugit, qui sapiente voluptate ipsum nobis nihil iusto amet aspernatur corporis? Modi nulla labore tempora autem.
+                            Nihil omnis quos mollitia eum pariatur, voluptas laborum? Repellat cum quae natus iusto itaque magni, quod esse mollitia numquam tempore unde optio corporis molestias, molestiae neque, eligendi culpa! Suscipit, cumque?</p>
+                            
+                        </div>
+                        <div class="col-12 col-sm-3 item-calls">
+                            <div id="placeholder">
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="container-fluid">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6 d-flex justify-content-center">
+                <div class="row">
+                    <p class="col-12">Elérhetőségek:</p>
+                    <p class="col-12">E-mail címünk: cristalia@gmail.com</p>
+                    <p class="col-12">Telefonszámunk: 06 30 010 0101</p>
+                </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
