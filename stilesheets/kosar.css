@@ -51,6 +51,9 @@
     background-color: red;
     height: 15rem;
     width: 15rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 #centered{
     display: flex;
@@ -67,9 +70,15 @@
 .one-item-prize p{
     margin-right: 5px;
 }
-@media screen and (min-width: 1155px){
-
-    
+.vertical-center-paragraph{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+.termek-card-design{
+    border-radius: 15px;
+    border: solid black 1px;
+    padding: 5px;
 }
 
 /*
