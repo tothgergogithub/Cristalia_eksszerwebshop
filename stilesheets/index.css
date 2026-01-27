@@ -1,7 +1,8 @@
 main{
-        background: rgba(79, 32, 13, 0.01);
-background: linear-gradient(0deg,rgba(79, 32, 13, 1) 0%, rgba(246, 241, 233, 1) 11%, rgba(246, 241, 233, 1) 89%, rgba(255, 255, 255, 1) 100%);
-
+    background: #ebd3a9;
+    background: linear-gradient(180deg, rgba(235, 211, 169, 1) 0%, rgba(79, 32, 13, 1) 100%);
+    margin-top: -16px;
+    padding-top: 15px;
 }
 .my-3{
     padding-bottom: 7rem;

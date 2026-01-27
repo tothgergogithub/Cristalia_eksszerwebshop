@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../stilesheets/bejelentkezes.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../stilesheets/rolunk.css">
     <link rel="stylesheet" href="../stilesheets/navbar-footer-style.css">
-  <link rel="stylesheet" href="../stilesheets/index.css">
-    <link rel="stylesheet" href="../stilesheets/bejelentkezes.css">
-    <link rel="stylesheet" href="../stilesheets/regisztracio.css">
     <title>Rólunk</title>
 </head>
 <body>
@@ -36,12 +31,12 @@
     
                     <div class="row">
                       <div class="col-12 col-sm-6">
-                        <li class="dropdown-item" href="#" role="button">Nyakláncok</li>
-                        <li class="dropdown-item" href="#" role="button">Karkötők</li>
+                        <a class="dropdown-item" href="nyaklancok.html" role="button">Nyakláncok</a>
+                        <a class="dropdown-item" href="karkotok.html" role="button">Karkötők</a>
                       </div>
                       <div class="col-12 col-sm-6">
-                        <li href="#" class="dropdown-item" role="button">Gyűrűk</li>
-                        <li href="#" class="dropdown-item" role="button">Fülbevalók</li>
+                        <a href="gyuruk.html" class="dropdown-item" role="button">Gyűrűk</a>
+                        <a href="fulbevalok.html" class="dropdown-item" role="button">Fülbevalók</a>
                       </div>
                     </div>
     
@@ -53,13 +48,13 @@
                 </li>
               </ul>
               <form class="justify-content-end">
-                <button class="btn btn-primary me-2" type="button">Regisztráció</button>
-                <button class="btn btn-primary me-2" type="button">Bejelentkezés</button>
+                <a class="btn btn-primary me-2" type="button">Regisztráció</a>
+                <a class="btn btn-primary me-2" type="button">Bejelentkezés</a>
     
               </form>
             </div>
           </div>
-        </nav>
+        
     
         <div class="offcanvas offcanvas-start" tabindex="-1" id="menuOffcanvas" aria-labelledby="menuOffcanvasLabel">
           <div class="offcanvas-header">
@@ -71,10 +66,10 @@
             <div class="container-fluid">
               <div class="row" id="offcanva-first-row">
                 <div class="col-6">
-                  <button type="button" class="btn btn-primary offcanvas-buttons">Regisztráció</button>
+                  <a href="regisztracio.html"> type="button" class="btn btn-primary offcanvas-buttons">Regisztráció</a>
                 </div>
                 <div class="col-6">
-                  <button type="button" class="btn btn-primary offcanvas-buttons">Bejelentkezés</button>
+                  <a href="bejentkezes.html"> type="button" class="btn btn-primary offcanvas-buttons">Bejelentkezés</a>
                 </div>
               </div>
             </div>
@@ -114,10 +109,9 @@
 <div class="container flex-grow-1 d-flex align-items-start pt-5">
     <div class="content-card">
         <p>
-            <strong>Rólunk:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar
-            ultricies, purus lectus malesuada libero, sit amet commodo magna
-            eros quis urna.
+            <strong>Rólunk:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, culpa molestias odio qui aspernatur dolores fuga quas eaque numquam eius adipisci iste blanditiis enim, quo consequatur delectus, fugiat atque. Sunt.
+            Delectus consectetur alias iure cumque quisquam animi iste, placeat, ratione repellat minima quia minus similique itaque facere! Repellat vitae nam soluta totam similique, tempore doloremque debitis nihil reprehenderit. Similique, sed!
+            Quae odit sunt magni aliquam maxime delectus libero iste quaerat! Molestias vitae, mollitia magnam voluptatem accusamus necessitatibus rerum sunt sit dolore repellat deleniti nostrum dolores incidunt sint ad ex doloribus.
         </p>
  
         <p>
@@ -127,14 +121,21 @@
 </div>
  
 
-<footer>
-    <div>Elérhetőségek</div>
-    <div>email: cristalia@gmail.com</div>
-    <div>telefonszám: 06 30 010 0101</div>
+<footer class="container-fluid">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6 d-flex justify-content-center">
+      <div class="row">
+        <p class="col-12">Elérhetőségek:</p>
+        <p class="col-12">E-mail címünk: cristalia@gmail.com</p>
+        <p class="col-12">Telefonszámunk: 06 30 010 0101</p>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
 </footer>
- 
 
  
-    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>    
 </body>
 </html>
