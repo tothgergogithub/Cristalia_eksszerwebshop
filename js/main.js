@@ -4,6 +4,19 @@
 
 
 
+let felhasznalo = {
+    testuser : {
+        vezeteknev : "URB",
+        keresznev : "DÁV",
+        emailcim : "example@gmail.com",
+        password  : "Pass"
+
+    }
+}
+
+
+
+
 
 
 
