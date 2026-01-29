@@ -122,8 +122,22 @@
               Ár
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Valamilyen</a></li>
-              <li><a class="dropdown-item" href="#">valamilyen2</a></li>
+              <label for="range4" class="form-label">Ár</label>
+              <input type="range" class="form-range" min="10000" max="300000" value="150000" id="range4">
+              <output for="range4" id="rangeValue" aria-hidden="true"></output>
+
+              <script>
+                // This is an example script, please modify as needed
+                const rangeInput = document.getElementById('range4');
+                const rangeOutput = document.getElementById('rangeValue');
+              
+                // Set initial value
+                rangeOutput.textContent = rangeInput.value;
+              
+                rangeInput.addEventListener('input', function() {
+                rangeOutput.textContent = this.value;
+                });
+              </script>
             </ul>
           </div>
         </div>
@@ -134,8 +148,36 @@
               Anyag
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Valamilyen</a></li>
-              <li><a class="dropdown-item" href="#">valamilyen2</a></li>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                <label class="form-check-label" for="checkChecked">
+                  Arany
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                <label class="form-check-label" for="checkChecked">
+                  Ezüst
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                <label class="form-check-label" for="checkChecked">
+                  Titánium
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                <label class="form-check-label" for="checkChecked">
+                  Palládium
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                <label class="form-check-label" for="checkChecked">
+                  Kobalt
+                </label>
+              </div>
             </ul>
           </div>
         </div>
@@ -149,10 +191,38 @@
             <button class="btn btn-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
               Stílus
             </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Valamilyen</a></li>
-              <li><a class="dropdown-item" href="#">valamilyen2</a></li>
-            </ul>
+              <ul class="dropdown-menu">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                  <label class="form-check-label" for="checkChecked">
+                    Romantikus
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                  <label class="form-check-label" for="checkChecked">
+                    Klasszikus
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                  <label class="form-check-label" for="checkChecked">
+                    Letisztult
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                  <label class="form-check-label" for="checkChecked">
+                    Egyedi
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                  <label class="form-check-label" for="checkChecked">
+                    Prémium
+                  </label>
+                </div>
+              </ul>
           </div>
         </div>
         <div class="col-sm-4">
@@ -161,8 +231,30 @@
               Karát
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Valamilyen</a></li>
-              <li><a class="dropdown-item" href="#">valamilyen2</a></li>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                <label class="form-check-label" for="checkChecked">
+                  9K
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                <label class="form-check-label" for="checkChecked">
+                  10K
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                <label class="form-check-label" for="checkChecked">
+                  14K
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+                <label class="form-check-label" for="checkChecked">
+                  18K
+                </label>
+              </div>
             </ul>
           </div>
         </div>
