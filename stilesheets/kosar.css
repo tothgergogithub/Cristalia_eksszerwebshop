@@ -36,7 +36,6 @@
     height: 20rem;
     display: flex;
     align-items: center;
-    border-bottom: 1px black solid;
 }
 #paybutton-bottom-margin{
     margin-bottom: 2rem;
@@ -79,6 +78,14 @@
     border-radius: 15px;
     border: solid black 1px;
     padding: 5px;
+}
+
+main{
+    background: #ebd3a9;
+    background: linear-gradient(180deg, rgba(235, 211, 169, 1) 0%, rgba(79, 32, 13, 1) 100%);
+    margin-top: -16px;
+    padding-top: 15px;
+    padding-bottom: 397px;
 }
 
 /*
