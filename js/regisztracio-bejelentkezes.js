@@ -8,18 +8,32 @@ let regisztralo = {
 
 function adatBeszedes() {
 
-    let emailDomainek =["@gmail.com", "@yahoo.com", "@hotmail.com", "@outlook.com"]
+    let vezeteknev = document.getElementById("vezeteknev")
+    let keresznev =  document.getElementById("keresznev")
+    let email = document.getElementById("email")
+    let telefonszam = document.getElementById("telefon")
 
-    regisztralo.vezeteknev = document.getElementById("vezeteknev").value
-    regisztralo.keresznev = document.getElementById("keresznev").value
-    let megadottemail = document.getElementById("email").value
-    let validEmailReg = /@(gmail\.com|freemail\.com|hotmail\.com|outlook\.com)$/i
-    if (validEmailReg.test(megadottemail)) {
-        regisztralo.emailcim = megadottemail
+    if (vezeteknev.value !== '' && keresznev.value !== '' && email.value !== '' && telefonszam.value != null){
+        regisztralo.vezeteknev = vezeteknev.value
+        regisztralo.keresznev = keresznev.value
+        let megadottemail = email.value
+        let validEmailReg = /@(gmail\.com|freemail\.com|hotmail\.com|outlook\.com)$/i
+        if (validEmailReg.test(megadottemail)) {
+            regisztralo.emailcim = megadottemail
+        }
+        else{
+            console.log("Hibás email címemt adtál meg.")
+        }
+        //telefonszám
+        
     }
-    else{
-        console.log("Hibás email címemt adtál meg.")
-    }
+    
+    
+    
+    
+    
+    //emali
+
     
 
 
