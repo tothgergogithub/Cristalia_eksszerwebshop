@@ -11,7 +11,8 @@ function adatBeszedes() {
     let vezeteknev = document.getElementById("vezeteknev")
     let keresznev =  document.getElementById("keresznev")
     let email = document.getElementById("email")
-    let telefonszam = document.getElementById("telefon")
+    let telefonszam =  document.getElementById("telefon")
+    console.log(telefonszam.value, typeof telefonszam.value)
 
     if (vezeteknev.value !== '' && keresznev.value !== '' && email.value !== '' && telefonszam.value != null){
         regisztralo.vezeteknev = vezeteknev.value
@@ -25,7 +26,16 @@ function adatBeszedes() {
             console.log("Hibás email címemt adtál meg.")
         }
         //telefonszám
-        
+        const phone = telefonszam.value;
+        if (/[^0-9]/.test(value)) {
+            console.log("CSak számokat adhatszmeg")
+            error.textContent = "Csak számokat adhatsz meg!";
+          } else {
+            error.textContent = "";
+          }
+        if(phone.length < 11 || phone.length> 13){
+            console.log("Nem jó a hossz")
+        }
     }
     
     
