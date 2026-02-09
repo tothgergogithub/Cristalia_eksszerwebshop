@@ -1,9 +1,9 @@
 let regisztralo = {
-    vezeteknev: "URB",
-    keresznev: "DV",
-    emailcim: "example@gmail.com",
-    telefonszam: "12345",
-    password: "Pass"
+    vezeteknev: "",
+    keresznev: "",
+    emailcim: "",
+    telefonszam: "",
+    password: ""
 }
 
 function adatBeszedes() {
@@ -12,9 +12,11 @@ function adatBeszedes() {
     let keresznev =  document.getElementById("keresznev")
     let email = document.getElementById("email")
     let telefonszam =  document.getElementById("telefon")
+    let jelszoEgy = document.getElementById("jelszo");
+    let jelszoIsmet = document.getElementById("jelszoismet");
     console.log(telefonszam.value, typeof telefonszam.value)
 
-    if (vezeteknev.value !== '' && keresznev.value !== '' && email.value !== '' && telefonszam.value != null){
+    if (vezeteknev.value !== '' && keresznev.value !== '' && email.value !== '' && telefonszam.value != null && jelszoEgy.value !== '' && jelszoIsmet !== ''){
         regisztralo.vezeteknev = vezeteknev.value
         regisztralo.keresznev = keresznev.value
         let megadottemail = email.value
@@ -26,16 +28,34 @@ function adatBeszedes() {
             console.log("Hibás email címemt adtál meg.")
         }
         //telefonszám
-        const phone = telefonszam.value;
-        if (/[^0-9]/.test(value)) {
-            console.log("CSak számokat adhatszmeg")
-            error.textContent = "Csak számokat adhatsz meg!";
+        const phone = Number( telefonszam.value);
+        if (/[^0-9]/.test(phone)) {
+            regisztralo.telefonszam = telefonszam.value
+            console.log("Csak számokat adhatszmeg")
           } else {
-            error.textContent = "";
+
           }
         if(phone.length < 11 || phone.length> 13){
             console.log("Nem jó a hossz")
         }
+        const validJelszo = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/
+        if(jelszoEgy.value === jelszoIsmet.value && validJelszo.test(jelszoEgy.value)){
+            regisztralo.password = jelszoEgy.value
+        }
+        else{
+            alert("Hejtelen jelszó")
+            
+        }
+        
+
+        console.log(regisztralo.keresznev)
+        console.log(regisztralo.vezeteknev)
+        console.log(regisztralo.emailcim)
+        console.log(regisztralo.telefonszam)
+        console.log(regisztralo.password)
+        
+
+
     }
     
     
