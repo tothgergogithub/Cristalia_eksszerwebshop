@@ -18,6 +18,7 @@
     align-items: center;
     border-radius: 15px;
     border: grey solid 1px;
+    background-color: white;
     height: 3rem;
     margin-top: 1rem;
 }

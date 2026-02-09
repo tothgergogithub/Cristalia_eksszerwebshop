@@ -108,35 +108,35 @@
             <h5>Regisztráció:</h5>
     
             <div class="mb-3">
-                <label class="form-label" id="vezeteknev">Vezetéknév</label>
-                <input type="text" class="form-control">
+                <label class="form-label" >Vezetéknév</label>
+                <input type="text" class="form-control" id="vezeteknev" required>
             </div>
     
             <div class="mb-3">
-                <label class="form-label" id="keresznev">Keresztnév</label>
-                <input type="text" class="form-control">
+                <label class="form-label" >Keresztnév</label>
+                <input type="text" class="form-control" id="keresznev" required>
             </div>
             <div class="mb-3">
-                <label class="form-label" id="email">Email-cím</label>
-                <input type="text" class="form-control">
+                <label class="form-label" >Email-cím</label>
+                <input type="text" class="form-control" id="email" required>
             </div>
             <div class="mb-3">
-                <label class="form-label" id="telefon">Telefonszám</label>
-                <input type="text" class="form-control">
+                <label class="form-label">Telefonszám</label>
+                <input type="text" class="form-control"  id="telefon" required>
             </div>
             <div class="mb-3">
-                <label class="form-label" id="jelszo">Jelszó</label>
-                <input type="password" class="form-control">
+                <label class="form-label" >Jelszó</label>
+                <input type="password" class="form-control" id="jelszo" required>
             </div>
             <div class="mb-3">
-                <label class="form-label" id="jelszoismet">Jelszó ismét</label>
-                <input type="password" class="form-control">
+                <label class="form-label" >Jelszó ismét</label>
+                <input type="password" class="form-control" id="jelszoismet" required>
             </div>
             
 
             
     
-            <button class="btn btn-login w-100" >Regisztráció</button>
+            <button class="btn btn-login w-100" onclick="adatBeszedes()">Regisztráció</button>
         </div>
     </div>
   </main>

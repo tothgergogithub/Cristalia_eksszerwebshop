@@ -1,25 +1,69 @@
 let regisztralo = {
-    vezeteknev: "URB",
-    keresznev: "DV",
-    emailcim: "example@gmail.com",
-    telefonszam: "12345",
-    password: "Pass"
+    vezeteknev: "",
+    keresznev: "",
+    emailcim: "",
+    telefonszam: "",
+    password: ""
 }
 
 function adatBeszedes() {
 
-    let emailDomainek =["@gmail.com", "@yahoo.com", "@hotmail.com", "@outlook.com"]
+    let vezeteknev = document.getElementById("vezeteknev")
+    let keresznev =  document.getElementById("keresznev")
+    let email = document.getElementById("email")
+    let telefonszam =  document.getElementById("telefon")
+    let jelszoEgy = document.getElementById("jelszo");
+    let jelszoIsmet = document.getElementById("jelszoismet");
+    console.log(telefonszam.value, typeof telefonszam.value)
 
-    regisztralo.vezeteknev = document.getElementById("vezeteknev").value
-    regisztralo.keresznev = document.getElementById("keresznev").value
-    let megadottemail = document.getElementById("email").value
-    let validEmailReg = /@(gmail\.com|freemail\.com|hotmail\.com|outlook\.com)$/i
-    if (validEmailReg.test(megadottemail)) {
-        regisztralo.emailcim = megadottemail
+    if (vezeteknev.value !== '' && keresznev.value !== '' && email.value !== '' && telefonszam.value != null && jelszoEgy.value !== '' && jelszoIsmet !== ''){
+        regisztralo.vezeteknev = vezeteknev.value
+        regisztralo.keresznev = keresznev.value
+        let megadottemail = email.value
+        let validEmailReg = /@(gmail\.com|freemail\.com|hotmail\.com|outlook\.com)$/i
+        if (validEmailReg.test(megadottemail)) {
+            regisztralo.emailcim = megadottemail
+        }
+        else{
+            console.log("Hibás email címemt adtál meg.")
+        }
+        //telefonszám
+        const phone = Number( telefonszam.value);
+        if (/[^0-9]/.test(phone)) {
+            regisztralo.telefonszam = telefonszam.value
+            console.log("Csak számokat adhatszmeg")
+          } else {
+
+          }
+        if(phone.length < 11 || phone.length> 13){
+            console.log("Nem jó a hossz")
+        }
+        const validJelszo = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/
+        if(jelszoEgy.value === jelszoIsmet.value && validJelszo.test(jelszoEgy.value)){
+            regisztralo.password = jelszoEgy.value
+        }
+        else{
+            alert("Hejtelen jelszó")
+            
+        }
+        
+
+        console.log(regisztralo.keresznev)
+        console.log(regisztralo.vezeteknev)
+        console.log(regisztralo.emailcim)
+        console.log(regisztralo.telefonszam)
+        console.log(regisztralo.password)
+        
+
+
     }
-    else{
-        console.log("Hibás email címemt adtál meg.")
-    }
+    
+    
+    
+    
+    
+    //emali
+
     
 
 
