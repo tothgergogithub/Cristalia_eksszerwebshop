@@ -1,9 +1,9 @@
-const productlist=document.getElementById("product-list");
-const template=document.getElementById("product-card-template")
-let cart=[];
-fetch()
-  .then(response => response.json())
-  .then(data => {
-    console.log(data); // itt már JS objektum!
+fetch("Json/kosar.json")
+  .then(res => {
+    if (!res.ok) throw new Error("Nem található a JSON");
+    return res.json();
   })
-  .catch(error => console.error("Hiba:", error));
+  .then(data => {
+    console.log("JSON betöltve:", data);
+  })
+  .catch(err => console.error("Hiba:", err));
