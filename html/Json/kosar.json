@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "nev": "nyaklanc",
+        "leiras": "",
+        "szarmazas": "europa",
+        "Ar": 0,
+        "anyag": "arany",
+        "stilus": "romantikus",
+        "karat": "9K"
+    },
+    {
+        "id": 2,
+        "nev": "nyaklanc",
+        "leiras": "",
+        "szarmazas": "afrika",
+        "Ar": 0,
+        "anyag": "ezust",
+        "stilus": "klasszikus",
+        "karat": "10K"
+    },
+    {
+        "id": 3,
+        "nev": "gyuruk",
+        "leiras": "",
+        "szarmazas": "europa",
+        "Ar": 0,
+        "anyag": "arany",
+        "stilus": "romantikus",
+        "karat": "9K"
+    },
+    {
+        "id": 4,
+        "nev": "gyuruk",
+        "leiras": "",
+        "szarmazas": "afrika",
+        "Ar": 0,
+        "anyag": "ezust",
+        "stilus": "klasszikus",
+        "karat": "10K"
+    }
+
+
+]
