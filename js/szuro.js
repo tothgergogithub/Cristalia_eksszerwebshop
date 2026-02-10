@@ -1,5 +1,15 @@
 const checkboxes = document.querySelectorAll(".form-check-input");
-const products = document.querySelectorAll(".product");
+const products = document.querySelectorAll(".termek");
+
+const rangeInput = document.getElementById('range4');
+const rangeOutput = document.getElementById('rangeValue');
+              
+// Set initial value
+rangeOutput.textContent = rangeInput.value;
+              
+rangeInput.addEventListener('input', function() {
+  rangeOutput.textContent = this.value;
+});
 
 checkboxes.forEach(checkbox => {
   checkbox.addEventListener("change", filterProducts);
@@ -14,9 +24,9 @@ function filterProducts() {
     const origin = product.dataset.origin;
 
     if (selectedOrigins.length === 0 || selectedOrigins.includes(origin)) {
-      product.style.display = "block";
+      product.classList.remove("hidden");
     } else {
-      product.style.display = "none";
+      product.classList.add("hidden");
     }
   });
 }
