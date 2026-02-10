@@ -29,15 +29,13 @@ function adatBeszedes() {
         }
         //telefonszám
         const phone = Number( telefonszam.value);
-        if (/[^0-9]/.test(phone)) {
+        if (/[^0-9]/.test(phone) && (phone.length <=13 || phone.length >= 11)) {
             regisztralo.telefonszam = telefonszam.value
             console.log("Csak számokat adhatszmeg")
           } else {
-
+            alert("Rossz telefonszám")
           }
-        if(phone.length < 11 || phone.length> 13){
-            console.log("Nem jó a hossz")
-        }
+        
         const validJelszo = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/
         if(jelszoEgy.value === jelszoIsmet.value && validJelszo.test(jelszoEgy.value)){
             regisztralo.password = jelszoEgy.value
@@ -55,6 +53,7 @@ function adatBeszedes() {
         console.log(regisztralo.password)
         
 
+        
 
     }
     
