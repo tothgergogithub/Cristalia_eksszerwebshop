@@ -7,7 +7,7 @@ let regisztralo = {
 }
 
 function adatBeszedes() {
-
+    // SCRUM-91 hez újj commit
     let vezeteknev = document.getElementById("vezeteknev")
     let keresznev =  document.getElementById("keresznev")
     let email = document.getElementById("email")
