@@ -29,3 +29,6 @@ main{
 .kartyakep{
     height: 220px;
 }
+.hidden {
+    display: none;
+}
