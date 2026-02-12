@@ -28,12 +28,16 @@ function adatBeszedes() {
             console.log("Hibás email címemt adtál meg.")
         }
         //telefonszám
-        const phone = Number( telefonszam.value);
-        if (/[^0-9]/.test(phone) && (phone.length <=13 || phone.length >= 11)) {
-            regisztralo.telefonszam = telefonszam.value
+        const phone =  telefonszam.value.trim();
+        if (/\D/.test(phone)) {
             console.log("Csak számokat adhatszmeg")
-          } else {
-            alert("Rossz telefonszám")
+        }
+        else if ( phone.length < 11 || phone.length > 13){
+            alert("Hibás a telefonszám hossza")
+        }
+         else {
+            regisztralo.telefonszam = telefonszam.value
+            
           }
         
         const validJelszo = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/
