@@ -1,44 +1,56 @@
 [
-    {
-        "id": 1,
-        "nev": "nyaklanc",
-        "leiras": "",
-        "szarmazas": "europa",
-        "Ar": 0,
-        "anyag": "arany",
-        "stilus": "romantikus",
-        "karat": "9K"
-    },
-    {
-        "id": 2,
-        "nev": "nyaklanc",
-        "leiras": "",
-        "szarmazas": "afrika",
-        "Ar": 0,
-        "anyag": "ezust",
-        "stilus": "klasszikus",
-        "karat": "10K"
-    },
-    {
-        "id": 3,
-        "nev": "gyuruk",
-        "leiras": "",
-        "szarmazas": "europa",
-        "Ar": 0,
-        "anyag": "arany",
-        "stilus": "romantikus",
-        "karat": "9K"
-    },
-    {
-        "id": 4,
-        "nev": "gyuruk",
-        "leiras": "",
-        "szarmazas": "afrika",
-        "Ar": 0,
-        "anyag": "ezust",
-        "stilus": "klasszikus",
-        "karat": "10K"
-    }
+    { "id": 1, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "europa", "ar": 12000, "anyag": "arany", "stilus": "romantikus", "karat": "9K" },
+    { "id": 2, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "afrika", "ar": 15000, "anyag": "ezust", "stilus": "klasszikus", "karat": "10K" },
+    { "id": 3, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "azsia", "ar": 18000, "anyag": "arany", "stilus": "premium", "karat": "14K" },
+    { "id": 4, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "amerika", "ar": 20000, "anyag": "titánium", "stilus": "romantikus", "karat": "18K" },
+    { "id": 5, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "europa", "ar": 9000, "anyag": "ezust", "stilus": "egyedi", "karat": "8K" },
+    { "id": 6, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "afrika", "ar": 11000, "anyag": "arany", "stilus": "klasszikus", "karat": "12K" },
+    { "id": 7, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "azsia", "ar": 13000, "anyag": "ezust", "stilus": "romantikus", "karat": "10K" },
+    { "id": 8, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "amerika", "ar": 25000, "anyag": "titánium", "stilus": "egyedi", "karat": "18K" },
+    { "id": 9, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "europa", "ar": 14000, "anyag": "arany", "stilus": "klasszikus", "karat": "14K" },
+    { "id": 10, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "afrika", "ar": 16000, "anyag": "ezust", "stilus": "klasszikus", "karat": "8K" },
+    { "id": 11, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "europa", "ar": 16000, "anyag": "ezust", "stilus": "romantikus", "karat": "8K" },
+    { "id": 12, "kategoria": "nyaklanc", "leiras": "", "szarmazas": "afrika", "ar": 16000, "anyag": "ezust", "stilus": "egyedi", "karat": "8K" },
 
 
+    
+
+    { "id": 13, "kategoria": "karkoto", "leiras": "", "szarmazas": "europa", "ar": 8000, "anyag": "arany", "stilus": "romantikus", "karat": "9K" },
+    { "id": 14, "kategoria": "karkoto", "leiras": "", "szarmazas": "afrika", "ar": 6000, "anyag": "ezust", "stilus": "klasszikus", "karat": "10K" },
+    { "id": 15, "kategoria": "karkoto", "leiras": "", "szarmazas": "azsia", "ar": 7000, "anyag": "arany", "stilus": "modern", "karat": "14K" },
+    { "id": 16, "kategoria": "karkoto", "leiras": "", "szarmazas": "amerika", "ar": 9000, "anyag": "titánium", "stilus": "minimalista", "karat": "18K" },
+    { "id": 17, "kategoria": "karkoto", "leiras": "", "szarmazas": "europa", "ar": 5000, "anyag": "ezust", "stilus": "boho", "karat": "8K" },
+    { "id": 18, "kategoria": "karkoto", "leiras": "", "szarmazas": "afrika", "ar": 7500, "anyag": "arany", "stilus": "antik", "karat": "12K" },
+    { "id": 19, "kategoria": "karkoto", "leiras": "", "szarmazas": "azsia", "ar": 8500, "anyag": "ezust", "stilus": "romantikus", "karat": "10K" },
+    { "id": 20, "kategoria": "karkoto", "leiras": "", "szarmazas": "amerika", "ar": 12000, "anyag": "titánium", "stilus": "luxus", "karat": "18K" },
+    { "id": 21, "kategoria": "karkoto", "leiras": "", "szarmazas": "europa", "ar": 9500, "anyag": "arany", "stilus": "klasszikus", "karat": "14K" },
+    { "id": 22, "kategoria": "karkoto", "leiras": "", "szarmazas": "afrika", "ar": 6500, "anyag": "ezust", "stilus": "modern", "karat": "8K" },
+    { "id": 23, "kategoria": "karkoto", "leiras": "", "szarmazas": "afrika", "ar": 6500, "anyag": "ezust", "stilus": "modern", "karat": "8K" },
+    { "id": 24, "kategoria": "karkoto", "leiras": "", "szarmazas": "afrika", "ar": 6500, "anyag": "ezust", "stilus": "modern", "karat": "8K" },
+
+    { "id": 25, "kategoria": "gyuru", "leiras": "", "szarmazas": "europa", "ar": 10000, "anyag": "arany", "stilus": "romantikus", "karat": "9K" },
+    { "id": 26, "kategoria": "gyuru", "leiras": "", "szarmazas": "afrika", "ar": 8000, "anyag": "ezust", "stilus": "klasszikus", "karat": "10K" },
+    { "id": 27, "kategoria": "gyuru", "leiras": "", "szarmazas": "azsia", "ar": 12000, "anyag": "arany", "stilus": "modern", "karat": "14K" },
+    { "id": 28, "kategoria": "gyuru", "leiras": "", "szarmazas": "amerika", "ar": 20000, "anyag": "titánium", "stilus": "minimalista", "karat": "18K" },
+    { "id": 29, "kategoria": "gyuru", "leiras": "", "szarmazas": "europa", "ar": 7000, "anyag": "ezust", "stilus": "boho", "karat": "8K" },
+    { "id": 30, "kategoria": "gyuru", "leiras": "", "szarmazas": "afrika", "ar": 9000, "anyag": "arany", "stilus": "antik", "karat": "12K" },
+    { "id": 31, "kategoria": "gyuru", "leiras": "", "szarmazas": "azsia", "ar": 11000, "anyag": "ezust", "stilus": "romantikus", "karat": "10K" },
+    { "id": 32, "kategoria": "gyuru", "leiras": "", "szarmazas": "amerika", "ar": 25000, "anyag": "titánium", "stilus": "luxus", "karat": "18K" },
+    { "id": 33, "kategoria": "gyuru", "leiras": "", "szarmazas": "europa", "ar": 13000, "anyag": "arany", "stilus": "klasszikus", "karat": "14K" },
+    { "id": 34, "kategoria": "gyuru", "leiras": "", "szarmazas": "afrika", "ar": 8500, "anyag": "ezust", "stilus": "modern", "karat": "8K" },
+    { "id": 35, "kategoria": "gyuru", "leiras": "", "szarmazas": "afrika", "ar": 8500, "anyag": "ezust", "stilus": "modern", "karat": "8K" },
+    { "id": 36, "kategoria": "gyuru", "leiras": "", "szarmazas": "afrika", "ar": 8500, "anyag": "ezust", "stilus": "modern", "karat": "8K" },
+
+    { "id": 37, "kategoria": "fulbevalo", "leiras": "", "szarmazas": "europa", "ar": 6000, "anyag": "arany", "stilus": "romantikus", "karat": "9K" },
+    { "id": 38, "kategoria": "fulbevalo", "leiras": "", "szarmazas": "afrika", "ar": 4000, "anyag": "ezust", "stilus": "klasszikus", "karat": "10K" },
+    { "id": 39, "kategoria": "fulbevalo", "leiras": "", "szarmazas": "azsia", "ar": 7000, "anyag": "arany", "stilus": "modern", "karat": "14K" },
+    { "id": 40, "kategoria": "fulbevalo", "leiras": "", "szarmazas": "amerika", "ar": 9000, "anyag": "platina", "stilus": "minimalista", "karat": "18K" },
+    { "id": 41, "kategoria": "fulbevalo", "leiras": "", "szarmazas": "europa", "ar": 5000, "anyag": "ezust", "stilus": "boho", "karat": "8K" },
+    { "id": 42, "kategoria": "fulbevalo", "leiras": "", "szarmazas": "afrika", "ar": 6500, "anyag": "arany", "stilus": "antik", "karat": "12K" },
+    { "id": 43, "kategoria": "fulbevalo", "leiras": "", "szarmazas": "azsia", "ar": 5500, "anyag": "ezust", "stilus": "romantikus", "karat": "10K" },
+    { "id": 44, "kategoria": "fulbevalo", "leiras": "", "szarmazas": "amerika", "ar": 15000, "anyag": "platina", "stilus": "luxus", "karat": "18K" },
+    { "id": 45, "kategoria": "fulbevalo", "leiras": "", "szarmazas": "europa", "ar": 8000, "anyag": "arany", "stilus": "klasszikus", "karat": "14K" },
+    { "id": 46, "kategoria": "fulbevalo", "leiras": "", "szarmazas": "afrika", "ar": 4500, "anyag": "ezust", "stilus": "modern", "karat": "8K" }
 ]
+
+    
