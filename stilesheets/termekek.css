@@ -27,6 +27,9 @@ main{
     margin-bottom: 50px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
+.card-body{
+    height: 300px;
+}
 .kartyakep{
     height: 220px;
 }
