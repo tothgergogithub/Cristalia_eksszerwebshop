@@ -29,6 +29,8 @@ main{
 }
 .card-body{
     height: 300px;
+    display: flex;
+    flex-direction: column;
 }
 .kartyakep{
     height: 220px;
@@ -38,4 +40,7 @@ main{
 }
 footer{
     padding-bottom: 50px;
+}
+#kosarba{
+    margin-top: auto;
 }
