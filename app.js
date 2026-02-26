@@ -40,6 +40,11 @@ app.get('/nyaklancok.html', (req, res) => {
 app.get('/rolunk.html', (req, res) => {
     res.sendFile(path.join(__dirname, "html", 'rolunk.html'));
 });
-app.listen(app.listen(3000, () => {
+
+
+
+
+
+app.listen(3000, () => {
     console.log('http://localhost:3000');
-}))
+})
