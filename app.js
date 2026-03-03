@@ -1,11 +1,22 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
+const { error } = require('console');
 const app = express();
+
 
 
 app.use(express.static(path.join(__dirname, 'stilesheets')));
 app.use(express.static(path.join(__dirname, 'img')));
 app.use(express.static(path.join(__dirname, 'js')));
+app.use(express.urlencoded({ extended: true }));
+
+/*
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+*/
 
 //ez a kód később implementálva lessz
 
@@ -42,27 +53,36 @@ app.get('/rolunk.html', (req, res) => {
 });
 
 
+app.post('/register', (req, res) => {
+    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
+    let regisztralo = {};
+
+    regisztralo.vezeteknev = vezeteknev
+    regisztralo.keresznev=keresznev
+    regisztralo.email = email
+    regisztralo.telefon=telefon
 
 
-
-app.listen(3000, () => {
-    console.log('http://localhost:3000');
+    fs.appendFile("reg.json", JSON.stringify(regisztralo, null, 2));
+    res.redirect('/')
 })
 
 
+
 /*
-Az implementálásra váró kódok:
+
+//Az implementálásra váró kódok:
 app.post('/register', (req, res) => {
     const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
-
+    
     let regisztralo = {};
     let hibak = [];
-
+    
     // 2. Üres mezők ellenőrzése
     if (!vezeteknev || !keresznev || !email || !telefon || !jelszo || !jelszoismet) {
         return res.status(400).send("Minden mezőt ki kell tölteni!");
     }
-
+    
     // 3. Email validáció
     const validEmailReg = /@(gmail\.com|freemail\.com|hotmail\.com|outlook\.com)$/i;
     if (validEmailReg.test(email)) {
@@ -70,7 +90,7 @@ app.post('/register', (req, res) => {
     } else {
         hibak.push("Hibás e-mail szolgáltató!");
     }
-
+    
     // 4. Telefonszám validáció
     const phone = telefon.trim();
     if (/\D/.test(phone)) {
@@ -80,33 +100,38 @@ app.post('/register', (req, res) => {
     } else {
         regisztralo.telefonszam = phone;
     }
-
+    
     // 5. Jelszó validáció
     const validJelszo = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
     if (jelszo === jelszoismet && validJelszo.test(jelszo)) {
-        regisztralo.password = jelszo; // Élesben itt használd a bcrypt-et titkosításhoz!
+        regisztralo.password = jelszo; 
     } else {
         hibak.push("A jelszavak nem egyeznek, vagy nem elég erősek!");
     }
-
+    
     // 6. Válasz küldése
     if (hibak.length > 0) {
         res.status(400).json({ sikeres: false, hibak: hibak });
     } else {
         regisztralo.vezeteknev = vezeteknev;
         regisztralo.keresznev = keresznev;
-
+        
         console.log("Sikeres validáció:", regisztralo);
         res.redirect('/');
         fs.appendFile("reg.json", JSON.stringify(regisztralo, null, 2), 
         error => { 
             if (error) throw error;
             console.log("hozzaadva")
-         })
+        })
     }
 })
 
 
-
-
 */
+
+
+
+app.listen(3000, () => {
+    console.log('http://localhost:3000');
+})
+
