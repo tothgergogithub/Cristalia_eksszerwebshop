@@ -54,17 +54,60 @@ app.get('/rolunk.html', (req, res) => {
 
 
 app.post('/register', (req, res) => {
-    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
-    let regisztralo = {};
-
-    regisztralo.vezeteknev = vezeteknev
-    regisztralo.keresznev=keresznev
-    regisztralo.email = email
-    regisztralo.telefon=telefon
+    res = { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
+    let jsonBody ={
+        table:[]
+    }
 
 
-    fs.appendFile("reg.json", JSON.stringify(regisztralo, null, 2));
-    res.redirect('/')
+   
+    let hibak = [];
+   /* 
+    if (!vezeteknev || !keresznev || !email || !telefon || !jelszo || !jelszoismet) {
+        return res.status(400).send("Minden mezőt ki kell tölteni!");
+    }
+    */
+    const validEmailReg = /@(gmail\.com|freemail\.com|hotmail\.com|outlook\.com)$/i;
+    if (validEmailReg.test(email)) {
+        res.emailcim = email;
+    } else {
+        hibak.push("Hibás e-mail szolgáltató!");
+    }
+    
+    const phone = telefon.trim();
+    if (/\D/.test(phone)) {
+        hibak.push("A telefonszám csak számokat tartalmazhat!");
+    } else if (phone.length < 11 || phone.length > 13) {
+        hibak.push("Hibás a telefonszám hossza!");
+    } else {
+        res.telefonszam = phone;
+    }
+    
+    const validJelszo = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+    if (jelszo === jelszoismet && validJelszo.test(jelszo)) {
+        res.password = jelszo; 
+    } else {
+        hibak.push("A jelszavak nem egyeznek, vagy nem elég erősek!");
+    }
+    
+    if (hibak.length > 0) {
+        res.status(400).json({ sikeres: false, hibak: hibak });
+    } else {
+        res.vezeteknev = vezeteknev;
+        res.keresznev = keresznev;
+        
+        console.log("Sikeres validáció:", res);
+        res.redirect('/');
+        JSON.stringify(res);
+        jsonBody.table.push(res);
+        console.log(jsonBody)
+
+        fs.appendFile("reg.json", JSON.stringify(res, null, 2)+",\n", 
+        error => { 
+            if (error) throw error;
+            console.log("hozzaadva")
+        })
+    }
 })
 
 
@@ -72,59 +115,6 @@ app.post('/register', (req, res) => {
 /*
 
 //Az implementálásra váró kódok:
-app.post('/register', (req, res) => {
-    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
-    
-    let regisztralo = {};
-    let hibak = [];
-    
-    // 2. Üres mezők ellenőrzése
-    if (!vezeteknev || !keresznev || !email || !telefon || !jelszo || !jelszoismet) {
-        return res.status(400).send("Minden mezőt ki kell tölteni!");
-    }
-    
-    // 3. Email validáció
-    const validEmailReg = /@(gmail\.com|freemail\.com|hotmail\.com|outlook\.com)$/i;
-    if (validEmailReg.test(email)) {
-        regisztralo.emailcim = email;
-    } else {
-        hibak.push("Hibás e-mail szolgáltató!");
-    }
-    
-    // 4. Telefonszám validáció
-    const phone = telefon.trim();
-    if (/\D/.test(phone)) {
-        hibak.push("A telefonszám csak számokat tartalmazhat!");
-    } else if (phone.length < 11 || phone.length > 13) {
-        hibak.push("Hibás a telefonszám hossza!");
-    } else {
-        regisztralo.telefonszam = phone;
-    }
-    
-    // 5. Jelszó validáció
-    const validJelszo = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
-    if (jelszo === jelszoismet && validJelszo.test(jelszo)) {
-        regisztralo.password = jelszo; 
-    } else {
-        hibak.push("A jelszavak nem egyeznek, vagy nem elég erősek!");
-    }
-    
-    // 6. Válasz küldése
-    if (hibak.length > 0) {
-        res.status(400).json({ sikeres: false, hibak: hibak });
-    } else {
-        regisztralo.vezeteknev = vezeteknev;
-        regisztralo.keresznev = keresznev;
-        
-        console.log("Sikeres validáció:", regisztralo);
-        res.redirect('/');
-        fs.appendFile("reg.json", JSON.stringify(regisztralo, null, 2), 
-        error => { 
-            if (error) throw error;
-            console.log("hozzaadva")
-        })
-    }
-})
 
 
 */
