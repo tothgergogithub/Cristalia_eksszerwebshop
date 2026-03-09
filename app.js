@@ -54,63 +54,67 @@ app.get('/rolunk.html', (req, res) => {
 
 
 app.post('/register', (req, res) => {
-    res = { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
-    let jsonBody ={
-        table:[]
-    }
+    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
 
 
-   
+
+    let usersjson = fs.readFileSync("reg.json","utf-8");
+
+    let jsonArr = JSON.parse(usersjson)
+
+    let regisztralo = {};
     let hibak = [];
-   /* 
+
+    // 2. Üres mezők ellenőrzése
     if (!vezeteknev || !keresznev || !email || !telefon || !jelszo || !jelszoismet) {
         return res.status(400).send("Minden mezőt ki kell tölteni!");
     }
-    */
+
+    // 3. Email validáció
     const validEmailReg = /@(gmail\.com|freemail\.com|hotmail\.com|outlook\.com)$/i;
     if (validEmailReg.test(email)) {
-        res.emailcim = email;
+        regisztralo.emailcim = email;
     } else {
         hibak.push("Hibás e-mail szolgáltató!");
     }
-    
+
+    // 4. Telefonszám validáció
     const phone = telefon.trim();
     if (/\D/.test(phone)) {
         hibak.push("A telefonszám csak számokat tartalmazhat!");
     } else if (phone.length < 11 || phone.length > 13) {
         hibak.push("Hibás a telefonszám hossza!");
     } else {
-        res.telefonszam = phone;
+        regisztralo.telefonszam = phone;
     }
-    
+
+    // 5. Jelszó validáció
     const validJelszo = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
     if (jelszo === jelszoismet && validJelszo.test(jelszo)) {
-        res.password = jelszo; 
+        regisztralo.password = jelszo; // Élesben itt használd a bcrypt-et titkosításhoz!
     } else {
         hibak.push("A jelszavak nem egyeznek, vagy nem elég erősek!");
     }
-    
+
+    // 6. Válasz küldése
     if (hibak.length > 0) {
         res.status(400).json({ sikeres: false, hibak: hibak });
     } else {
-        res.vezeteknev = vezeteknev;
-        res.keresznev = keresznev;
-        
-        console.log("Sikeres validáció:", res);
+        regisztralo.vezeteknev = vezeteknev;
+        regisztralo.keresznev = keresznev;
+        jsonArr.push(regisztralo)
+        usersjson = JSON.stringify(jsonArr)
+        fs.writeFileSync("reg.json", usersjson, "utf-8")
+        console.log("Sikeres validáció:", regisztralo);
         res.redirect('/');
-        JSON.stringify(res);
-        jsonBody.table.push(res);
-        console.log(jsonBody)
-
-        fs.appendFile("reg.json", JSON.stringify(res, null, 2)+",\n", 
-        error => { 
+        error => {
             if (error) throw error;
             console.log("hozzaadva")
-        })
+        }
     }
+
+
 })
-
-
 
 /*
 
@@ -118,7 +122,6 @@ app.post('/register', (req, res) => {
 
 
 */
-
 
 
 app.listen(3000, () => {
