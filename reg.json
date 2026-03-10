@@ -1,16 +1,16 @@
 [
-  {
-    "emailcim": "nod@gmail.com",
-    "telefonszam": "12413131311",
-    "password": "asdASD@1",
-    "vezeteknev": "maka",
-    "keresznev": "adadad"
-  },
-  {
-    "emailcim": "bod@gmail.com",
-    "telefonszam": "12413131311",
-    "password": "asdASD@1",
-    "vezeteknev": "iausdgf",
-    "keresznev": "lsdkjf"
-  }
+    {
+        "emailcim": "nod@gmail.com",
+        "telefonszam": "12413131311",
+        "password": "asdASD@1",
+        "vezeteknev": "maka",
+        "keresznev": "adadad"
+    },
+    {
+        "emailcim": "bod@gmail.com",
+        "telefonszam": "12413131311",
+        "password": "asdASD@1",
+        "vezeteknev": "iausdgf",
+        "keresznev": "lsdkjf"
+    }
 ]
