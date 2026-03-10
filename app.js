@@ -54,16 +54,18 @@ app.get('/rolunk.html', (req, res) => {
 
 
 app.post('/register', (req, res) => {
-    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
 
-
-
-    let usersjson = fs.readFileSync("reg.json","utf-8");
-
+    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet} = req.body;
+    let usersjson = fs.readFileSync("reg.json", "utf-8");
     let jsonArr = JSON.parse(usersjson)
-
     let regisztralo = {};
     let hibak = [];
+    
+
+
+    regisztralo.id= jsonArr.length+1
+    
+
 
     // 2. Üres mezők ellenőrzése
     if (!vezeteknev || !keresznev || !email || !telefon || !jelszo || !jelszoismet) {
@@ -102,6 +104,7 @@ app.post('/register', (req, res) => {
     } else {
         regisztralo.vezeteknev = vezeteknev;
         regisztralo.keresznev = keresznev;
+        console.log(regisztralo)
         jsonArr.push(regisztralo)
         usersjson = JSON.stringify(jsonArr)
         fs.writeFileSync("reg.json", usersjson, "utf-8")
@@ -116,12 +119,10 @@ app.post('/register', (req, res) => {
 
 })
 
-/*
-
-//Az implementálásra váró kódok:
-
-
-*/
+app.post('/login', (req, res)=>{
+    const {username, password} = req.body
+    fs.readFileSync('reg.json', "utf-8")
+})
 
 
 app.listen(3000, () => {

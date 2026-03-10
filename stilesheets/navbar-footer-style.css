@@ -35,8 +35,7 @@ footer p {
     color: #000;
 }
 .navbar{
-    border-bottom: 1px black solid;
-    background-color: white !important;
+    background-color: #ebd3a9 !important;
 }
 
 #navba-dropdown-subsites {

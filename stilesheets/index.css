@@ -1,12 +1,12 @@
 main{
     background: #ebd3a9;
     background: linear-gradient(180deg, rgba(235, 211, 169, 1) 0%, rgba(79, 32, 13, 1) 100%);
-    margin-top: -16px;
     padding-top: 15px;
 }
 .my-3{
     padding-bottom: 7rem;
     margin-bottom: 0px !important;
+   
 }
 
 .text-on-img-container {

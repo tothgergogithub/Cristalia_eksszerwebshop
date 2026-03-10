@@ -105,20 +105,22 @@
 <main>
     <div class="container d-flex justify-content-center align-items-center flex-grow-1">
         <div class="login-card">
+          <form action="/login" method="post">
             <h5>Bejelentkezés:</h5>
 
             <div class="mb-3">
                 <label class="form-label">Felhasználónév</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" required name="username">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Jelszó</label>
-                <input type="password" class="form-control">
+                <input type="password" class="form-control" required name="password">
             </div>
 
-            <button class="btn btn-login w-100">Bejelentkezés</button>
+            <button class="btn btn-login w-100" type="submit">Bejelentkezés</button>
         </div>
+          </form>
     </div>
   </main>
 <footer class="container-fluid">
