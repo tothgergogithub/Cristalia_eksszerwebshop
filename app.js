@@ -1,11 +1,22 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
+const { error } = require('console');
 const app = express();
+
 
 
 app.use(express.static(path.join(__dirname, 'stilesheets')));
 app.use(express.static(path.join(__dirname, 'img')));
 app.use(express.static(path.join(__dirname, 'js')));
+app.use(express.urlencoded({ extended: true }));
+
+/*
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+*/
 
 //ez a kód később implementálva lessz
 
@@ -42,21 +53,19 @@ app.get('/rolunk.html', (req, res) => {
 });
 
 
-
-
-
-app.listen(3000, () => {
-    console.log('http://localhost:3000');
-})
-
-
-/*
-Az implementálásra váró kódok:
 app.post('/register', (req, res) => {
-    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
 
+    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet} = req.body;
+    let usersjson = fs.readFileSync("reg.json", "utf-8");
+    let jsonArr = JSON.parse(usersjson)
     let regisztralo = {};
     let hibak = [];
+    
+
+
+    regisztralo.id= jsonArr.length+1
+    
+
 
     // 2. Üres mezők ellenőrzése
     if (!vezeteknev || !keresznev || !email || !telefon || !jelszo || !jelszoismet) {
@@ -95,18 +104,28 @@ app.post('/register', (req, res) => {
     } else {
         regisztralo.vezeteknev = vezeteknev;
         regisztralo.keresznev = keresznev;
-
+        console.log(regisztralo)
+        jsonArr.push(regisztralo)
+        usersjson = JSON.stringify(jsonArr)
+        fs.writeFileSync("reg.json", usersjson, "utf-8")
         console.log("Sikeres validáció:", regisztralo);
         res.redirect('/');
-        fs.appendFile("reg.json", JSON.stringify(regisztralo, null, 2), 
-        error => { 
+        error => {
             if (error) throw error;
             console.log("hozzaadva")
-         })
+        }
     }
+
+
+})
+
+app.post('/login', (req, res)=>{
+    const {username, password} = req.body
+    fs.readFileSync('reg.json', "utf-8")
 })
 
 
+app.listen(3000, () => {
+    console.log('http://localhost:3000');
+})
 
-
-*/
