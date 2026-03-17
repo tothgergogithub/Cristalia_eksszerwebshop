@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const originFilters = document.querySelectorAll('.origin-filter');
-    const styleFilters = document.querySelectorAll('.data-style');
-    const caratFilters = document.querySelectorAll('.data-carat');
-    const anyagFilters = document.querySelectorAll('.data-anyag');
-    const priceRange = document.querySelector('.data-price');
-    const rangeValue = document.getElementById('rangeValue');
-    const products = document.querySelectorAll('.termek');
+    let originFilters = document.querySelectorAll('.origin-filter');
+    let styleFilters = document.querySelectorAll('.data-style');
+    let caratFilters = document.querySelectorAll('.data-carat');
+    let anyagFilters = document.querySelectorAll('.data-anyag');
+    let priceRange = document.querySelector('.data-price');
+    let rangeValue = document.getElementById('rangeValue');
+    let products = document.querySelectorAll('.termek');
   
     if (priceRange && rangeValue) {
       updateRangeValue();
@@ -37,36 +37,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   
     function applyFilters() {
-      const selectedOrigins = Array.from(originFilters)
+      let selectedOrigins = Array.from(originFilters)
         .filter(f => f.checked)
         .map(f => f.value);
   
-      const selectedStyles = Array.from(styleFilters)
+      let selectedStyles = Array.from(styleFilters)
         .filter(f => f.checked)
         .map(f => f.value);
   
-      const selectedCarats = Array.from(caratFilters)
+      let selectedCarats = Array.from(caratFilters)
         .filter(f => f.checked)
         .map(f => f.value);
   
-      const selectedAnyag = Array.from(anyagFilters)
+      let selectedAnyag = Array.from(anyagFilters)
         .filter(f => f.checked)
         .map(f => f.value);
   
-      const maxPrice = parseInt(priceRange.value);
+      let maxPrice = parseInt(priceRange.value);
   
       products.forEach(product => {
-        const productOrigin = product.dataset.origin;
-        const productStyle = product.dataset.style;
-        const productCarat = product.dataset.carat;
-        const productAnyag = product.dataset.anyag;
-        const productPrice = parseInt(product.dataset.price);
+        let productOrigin = product.dataset.origin;
+        let productStyle = product.dataset.style;
+        let productCarat = product.dataset.carat;
+        let productAnyag = product.dataset.anyag;
+        let productPrice = parseInt(product.dataset.price);
   
-        const originMatch = selectedOrigins.length === 0 || selectedOrigins.includes(productOrigin);
-        const styleMatch = selectedStyles.length === 0 || selectedStyles.includes(productStyle);
-        const caratMatch = selectedCarats.length === 0 || selectedCarats.includes(productCarat);
-        const anyagMatch = selectedAnyag.length === 0 || selectedAnyag.includes(productAnyag);
-        const priceMatch = productPrice <= maxPrice;
+        let originMatch = selectedOrigins.length === 0 || selectedOrigins.includes(productOrigin);
+        let styleMatch = selectedStyles.length === 0 || selectedStyles.includes(productStyle);
+        let caratMatch = selectedCarats.length === 0 || selectedCarats.includes(productCarat);
+        let anyagMatch = selectedAnyag.length === 0 || selectedAnyag.includes(productAnyag);
+        let priceMatch = productPrice <= maxPrice;
   
         if (originMatch && styleMatch && caratMatch && anyagMatch && priceMatch) {
           product.style.display = '';
