@@ -1,32 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const kosar = JSON.parse(localStorage.getItem('kosar')) || [];
-    const template = document.getElementById('card-template');
-    const fizetendoElem = document.getElementById('osszeg');
+async function kosar(){
+    try{
+        const kosarbetolt = await fetch("Json/kosar.json");
+        const kosar = await kosarbetolt.json();
+        console.log("Kosár:", kosar);
 
-    let vegosszeg = 0;
+        const termekbetolt = await fetch("Json/kosar.json");
+        const termek = await termekbetolt.json();
+        console.log("Termékek:", termek);
 
-    kosar.forEach(termek => {
-        const clone = template.content.cloneNode(true);
+    } catch(err){
+        console.log(err);
+    }
+}
 
-       
-        const img = clone.querySelector('.product-image');
-        img.src = termek.kep;
-
-        const leiras = clone.querySelector("p");
-        leiras.textContent = `${termek.mennyiseg}× ${termek.nev}`;
-
-        
-        const arElem = clone.querySelector("#egy-termek-fizetendo");
-        const osszeg = termek.ar * termek.mennyiseg;
-        arElem.textContent = osszeg;
-
-        
-        vegosszeg += osszeg;
-
-        
-        template.parentElement.appendChild(clone);
-    });
-
-    
-    fizetendoElem.textContent = vegosszeg;
-});
+kosar();
