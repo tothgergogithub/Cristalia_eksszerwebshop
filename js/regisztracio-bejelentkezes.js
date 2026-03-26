@@ -30,7 +30,7 @@ function adatBeszedes() {
         //telefonszám
         const phone =  telefonszam.value.trim();
         if (/\D/.test(phone)) {
-            console.log("Csak számokat adhatszmeg")
+            console.log("Csak számokat adhatsz meg")
         }
         else if ( phone.length < 11 || phone.length > 13){
             alert("Hibás a telefonszám hossza")
@@ -45,8 +45,7 @@ function adatBeszedes() {
             regisztralo.password = jelszoEgy.value
         }
         else{
-            alert("Hejtelen jelszó")
-            
+            alert("Helytelen jelszó")
         }
         
 
