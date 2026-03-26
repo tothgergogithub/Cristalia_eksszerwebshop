@@ -1,16 +1,17 @@
-async function kosar(){
-    try{
-        const kosarbetolt = await fetch("Json/kosar.json");
-        const kosar = await kosarbetolt.json();
-        console.log("Kosár:", kosar);
+async function kosar() {
+    try {
+        const res = await fetch("../Json/kosar.json");
 
-        const termekbetolt = await fetch("Json/kosar.json");
-        const termek = await termekbetolt.json();
-        console.log("Termékek:", termek);
+        if (!res.ok) {
+            throw new Error("Nem található a JSON fájl! " + res.status);
+        }
 
-    } catch(err){
-        console.log(err);
+        const adat = await res.json();
+        console.log("Kosár:", adat);
+
+    } catch (err) {
+        console.log("Hiba:", err);
     }
+    
 }
-
-kosar();
+kosar()
