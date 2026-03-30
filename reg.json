@@ -1,1 +1,19 @@
-[{"emailcim":"nod@gmail.com","telefonszam":"12413131311","password":"asdASD@1","vezeteknev":"maka","keresznev":"adadad"},{"emailcim":"nod@gmail.com","telefonszam":"12413131311","password":"asdASD@1","vezeteknev":"maka","keresznev":"adadad"},{"id":3,"emailcim":"nod@gmail.com","telefonszam":"12413131311","password":"asdASD@1","vezeteknev":"maka","keresznev":"adadad"}]
+[
+    {
+        "id": 1,
+        "emailcim": "totgergo@gmail.com",
+        "telefonszam": "11111111111",
+        "password": "asdASD@123",
+        "vezeteknev": "Tót",
+        "keresznev": "Grego"
+    },
+    {
+        "id": 2,
+        "felhasznalonev": "asd92",
+        "emailcim": "asd@gmail.com",
+        "telefonszam": "111111111111",
+        "password": "asdASD@123",
+        "vezeteknev": "asd",
+        "keresznev": "asd"
+    }
+]
