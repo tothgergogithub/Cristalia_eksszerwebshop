@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 */
 
 //ez a kód később implementálva lessz
-
+{ //app.get reqestek a navigációhoz
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "html", 'index.html'));
 });
@@ -51,11 +51,11 @@ app.get('/nyaklancok.html', (req, res) => {
 app.get('/rolunk.html', (req, res) => {
     res.sendFile(path.join(__dirname, "html", 'rolunk.html'));
 });
-
+}
 
 app.post('/register', (req, res) => {
 
-    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet} = req.body;
+    const { vezeteknev, keresznev,felhasznalonev, email, telefon, jelszo, jelszoismet} = req.body;
     let usersjson = fs.readFileSync("reg.json", "utf-8");
     let jsonArr = JSON.parse(usersjson)
     let regisztralo = {};
@@ -68,10 +68,10 @@ app.post('/register', (req, res) => {
 
 
     // 2. Üres mezők ellenőrzése
-    if (!vezeteknev || !keresznev || !email || !telefon || !jelszo || !jelszoismet) {
+    if (!vezeteknev || !keresznev || !email || !telefon || !jelszo || !jelszoismet || !felhasznalonev) {
         return res.status(400).send("Minden mezőt ki kell tölteni!");
     }
-
+    regisztralo.felhasznalonev = felhasznalonev
     // 3. Email validáció
     const validEmailReg = /@(gmail\.com|freemail\.com|hotmail\.com|outlook\.com)$/i;
     if (validEmailReg.test(email)) {
@@ -121,7 +121,20 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res)=>{
     const {username, password} = req.body
-    fs.readFileSync('reg.json', "utf-8")
+
+    let jsonFile = fs.readFileSync('reg.json', "utf-8")
+    if (!username || !password) {}
+
+    console.log(jsonFile)
+    jsonFile.forEach(registeredusers => {
+        if(registeredusers.username === username || registeredusers.email === username && password === registeredusers.password){
+            alert("Sikeres bejelentkezés")
+        }
+        else{
+            alert("Sikertelen bejelentkezés")
+        }
+    });
+
 })
 
 
