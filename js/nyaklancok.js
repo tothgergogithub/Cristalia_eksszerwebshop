@@ -1,7 +1,6 @@
 
-document.addEventListener("DOMContentLoaded", () => {
 
-   
+    let mennyiseg = 0;
     const gombok = document.getElementsByClassName('kosarba');
 
    
@@ -14,12 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 id: this.dataset.id,
                 nev: this.dataset.nev,
                 ar: parseInt(this.dataset.ar),
-                mennyiseg: 1
+                
             };
 
             let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
 
-            const letezo = kosar.find(t => t.id === termek.id);
+            const letezo = kosar.find(t => t.id == termek.id);
 
             if (letezo) {
                 letezo.mennyiseg++;
@@ -33,4 +32,4 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-});
+
