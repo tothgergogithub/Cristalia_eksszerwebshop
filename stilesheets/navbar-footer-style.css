@@ -5,7 +5,20 @@
  --btn-sucsess-active-border: #6b4300;
 }
 
+.dropdown-toggle::before{
+    display: none !important;
+}
 
+.btn-info{
+    --button-transparent : transparent;
+    background-color: var(--button-transparent ) !important;
+    border: none !important;
+    --bs-btn-hover-bg: var(--button-transparent ) !important;
+    --bs-btn-hover-border-color: var(--button-transparent ) !important;
+    --bs-btn-active-bg: var(--button-transparent) !important;
+    --bs-btn-active-border-color: var(--button-transparent) !important;
+    
+}
 
 body {
     flex-direction: column;
@@ -63,6 +76,15 @@ footer p {
 
 #offcanva-first-row .col-6{
     padding: 2px;
+}
+.offcanvas-items{
+     padding: 2px;
+}
+#loged-in-offcan-pic{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
 }
 #offcanva-navbar-costume .nav-link{
     text-align: left !important;
