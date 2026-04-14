@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'js')));
 app.use(express.urlencoded({ extended: true }));
 
 const REG_FILE = path.join(__dirname, 'reg.json');
-
+const KOSAR_FILE = path.join(__dirname, 'kosar.json');
 
 /*
 
@@ -224,4 +224,5 @@ app.listen(3000, () => {
 
 async function termekekbeolv() {
     
+    const termekjson=await fs.readFile(KOSAR_FILE, 'utf-8')
 }
