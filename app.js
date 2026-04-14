@@ -10,14 +10,14 @@ app.use(session({
     secret: 'crist-web',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false } // https-nél true
+    cookie: { secure: false }
 }));
 app.use(express.static(path.join(__dirname, 'stilesheets')));
 app.use(express.static(path.join(__dirname, 'img')));
 app.use(express.static(path.join(__dirname, 'js')));
 app.use(express.urlencoded({ extended: true }));
 
-const REG_FILE = path.join(__dirname, 'reg.json');
+const REG_FILE = path.join('reg.json');
 
 
 /*
@@ -155,31 +155,21 @@ app.post('/register', async (req, res) => {
 
 
 app.post('/login', (req, res) => {
-    console.log("At least this")
+
     const { username, password } = req.body
 
     const USERS = JSON.parse(fs.readFileSync('reg.json', "utf-8"));
     if (!username || !password) {
         alert("Üres valamelyik kötelező mező.")
     }
-    console.log("At least this")
-    let userCheck;
-    console.log("At least this")
-    if (/\D/.test(username)) { //megnézi hogy szám-e az adott input
-        console.log("At least this")
-        userCheck = USERS.find(u => u.emailcim === username && u.password === password)
 
+    let userCheck;
+
+    if (/\D/.test(username)) { //megnézi hogy szám-e az adott input
+        userCheck = USERS.find(u => u.emailcim === username && u.password === password)
     }
     else {
-        console.log("At least this")
         userCheck = USERS.find(u => u.telefonszam === username && u.password === password)
-        if (!userCheck) {
-            console.log("At least this")
-
-        }
-        else {
-            console.log("At least this")
-        }
 
 
     }
