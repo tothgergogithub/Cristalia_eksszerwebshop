@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname, 'img')));
 app.use(express.static(path.join(__dirname, 'js')));
 app.use(express.urlencoded({ extended: true }));
 
-const REG_FILE = path.join('reg.json');
-
+const REG_FILE = path.join(__dirname, 'reg.json');
+const KOSAR_FILE = path.join(__dirname, 'kosar.json');
 
 /*
 
@@ -61,6 +61,9 @@ app.use(express.urlencoded({ extended: true }));
         res.sendFile(path.join(__dirname, "html", 'rolunk.html'));
     });
 }
+app.get('/getkosarjson', (req, res)=>{
+
+})
 
 app.post('/register', async (req, res) => {
     try {
@@ -209,3 +212,7 @@ app.listen(3000, () => {
     console.log('http://localhost:3000');
 })
 
+async function termekekbeolv() {
+    
+    const termekjson=await fs.readFile(KOSAR_FILE, 'utf-8')
+}
