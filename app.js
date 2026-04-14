@@ -52,6 +52,9 @@ app.get('/rolunk.html', (req, res) => {
     res.sendFile(path.join(__dirname, "html", 'rolunk.html'));
 });
 }
+app.get('/getkosarjson', (req, res)=>{
+
+})
 
 app.post('/register', (req, res) => {
 
@@ -142,3 +145,6 @@ app.listen(3000, () => {
     console.log('http://localhost:3000');
 })
 
+async function termekekbeolv() {
+    
+}
