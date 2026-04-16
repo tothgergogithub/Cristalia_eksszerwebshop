@@ -33,7 +33,7 @@
         };
     }
 
-
+*/
 document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("termekek-container");
     try {
