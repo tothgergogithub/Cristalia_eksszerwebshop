@@ -61,9 +61,7 @@ app.use(express.urlencoded({ extended: true }));
         res.sendFile(path.join(__dirname, "html", 'rolunk.html'));
     });
 }
-app.get('/getkosarjson', (req, res)=>{
 
-})
 
 app.post('/register', async (req, res) => {
     try {
@@ -213,6 +211,19 @@ app.listen(3000, () => {
 })
 
 async function termekekbeolv() {
-    
-    const termekjson=await fs.readFile(KOSAR_FILE, 'utf-8')
+    try{
+        const termekjson=await fs.readFile(KOSAR_FILE, 'utf-8')
+        const termekArr=JSON.parse(termekjson || '[]'); 
+        console.log("sikeres beolvasás:");
+        return termekArr;
+    }
+    catch(error){
+        console.error('Fájl olvasási hiba:', error);
+    }
+    console.log("sikeres beolvasás:");
 }
+app.get('/getkosarjson', (req, res)=>{
+
+    termekekbeolv();
+    res.json(termekekbeolv());
+})
