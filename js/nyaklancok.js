@@ -1,6 +1,6 @@
 
-
-    let mennyiseg = 0;
+    localStorage.clear();
+    /*let mennyiseg = 0;
     const gombok = document.getElementsByClassName('kosarba');
 
    
@@ -15,6 +15,7 @@
                 ar: parseInt(this.dataset.ar),
                 
             };
+            console.log(termek)
 
             let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
 

@@ -1,1 +1,18 @@
-[{"id":1,"emailcim":"jacht@gmail.com","telefonszam":"11111111111","password":"asdASD@123","vezeteknev":"asd","keresznev":"asd"},{"id":2,"emailcim":"asd@gmail.com","telefonszam":"111123123123","password":"asdASD@123","vezeteknev":"asd","keresznev":"asd"}]
+[
+    {
+        "id": 1,
+        "emailcim": "jacht@gmail.com",
+        "telefonszam": "11111111111",
+        "password": "asdASD@123",
+        "vezeteknev": "asd",
+        "keresznev": "asd"
+    },
+    {
+        "id": 2,
+        "emailcim": "asd@gmail.com",
+        "telefonszam": "111123123123",
+        "password": "asdASD@123",
+        "vezeteknev": "asd",
+        "keresznev": "asd"
+    }
+]
