@@ -122,7 +122,7 @@
     {
         "id": 11,
         "kategoria": "nyaklanc",
-        "kep" : "/nyaklancok/afrikainyaklancbarna.jpg",
+        "kep" : "/nyaklancok/titaniumfeher.webp",
         "nev": "Palladium Szerelemfény",
         "leiras": "A palládium lágy fénye romantikus európai stílusban kel életre. Finom, nőies darab, amely elegánsan keretezi a megjelenést.",
         "szarmazas": "europa",
@@ -134,7 +134,7 @@
     {
         "id": 12,
         "kategoria": "nyaklanc",
-        "kep" : "/nyaklancok/afrikainyaklancbarna.jpg",
+        "kep" : "/nyaklancok/afrikaiezust.jpeg",
         "nev": "Ezüst Törzsjel",
         "leiras": "Egyedi afrikai motívumokkal készült ezüst nyaklánc, amely különleges személyiséget sugároz. Kiváló választás, ha szereted a karakteres, mégis elegáns kiegészítőket.",
         "szarmazas": "afrika",
@@ -146,6 +146,7 @@
     {
         "id": 13,
         "kategoria": "karkoto",
+        "kep": "/karkotok/aranykarkoto.jpg",
         "nev": "Európa Aranyi Ábránd",
         "leiras": "Lágy aranyfénye romantikus, európai eleganciát sugároz. Finom részletei miatt tökéletes választás különleges alkalmakhoz.",
         "szarmazas": "europa",
@@ -157,6 +158,7 @@
     {
         "id": 14,
         "kategoria": "karkoto",
+        "kep": "/karkotok/ezustkarkoto.jpg",
         "nev": "Ezüst Tradició",
         "leiras": "Klasszikus európai stílusával időtlen kifinomultságot képvisel. Letisztult formája minden öltözékhez elegánsan illeszkedik.",
         "szarmazas": "europa",
@@ -168,6 +170,7 @@
     {
         "id": 15,
         "kategoria": "karkoto",
+        "kep": "/karkotok/palladium.avif",
         "nev": "Palladium Arisztokrata",
         "leiras": "A prémium palládium fényes ragyogása európai precizitással párosul. Igazi luxusdarab, amely azonnal magára vonja a tekintetet.",
         "szarmazas": "europa",
@@ -179,6 +182,7 @@
     {
         "id": 16,
         "kategoria": "karkoto",
+        "kep": "/karkotok/titanium.jpg",
         "nev": "Amerikai Titánív",
         "leiras": "Amerikai letisztultság és modern titánium találkozik ebben a könnyed, mégis erőteljes karkötőben. A minimalizmus kedvelőinek tökéletes választás.",
         "szarmazas": "amerika",
@@ -190,6 +194,7 @@
     {
         "id": 17,
         "kategoria": "karkoto",
+        "kep": "/karkotok/egyediezust.webp",
         "nev": "Kreatív ezüstvonal",
         "leiras": "Egyedi amerikai formavilága karakteres, modern megjelenést ad. Az ezüst fényessége különleges energiát sugároz.",
         "szarmazas": "amerika",
@@ -201,6 +206,7 @@
     {
         "id": 18,
         "kategoria": "karkoto",
+        "kep": "/karkotok/romantickobalt.webp",
         "nev": "Kobalt Alkony",
         "leiras": "A kobalt mély tónusa romantikus, amerikai stílusban kel életre. Egyedi színvilága különleges hangulatot teremt.",
         "szarmazas": "amerika",
@@ -212,6 +218,7 @@
     {
         "id": 19,
         "kategoria": "karkoto",
+        "kep": "/karkotok/azsiaikobalt.webp",
         "nev": "Keleti Kobaltvirág",
         "leiras": "Ázsiai finomsággal megformált romantikus karkötő, amely a kobalt különleges árnyalatával hódít. Lágyság és erő tökéletes harmóniája.",
         "szarmazas": "azsia",
@@ -223,6 +230,7 @@
     {
         "id": 20,
         "kategoria": "karkoto",
+        "kep": "/karkotok/titaniumazsia.jpg",
         "nev": "Titán Zen Egyensúly",
         "leiras": "A titánium modern ereje klasszikus ázsiai eleganciával találkozik. Tartós, időtálló darab, amely minden részletében kifinomult.",
         "szarmazas": "azsia",
@@ -234,6 +242,7 @@
     {
         "id": 21,
         "kategoria": "karkoto",
+        "kep": "/karkotok/premiumarany.jpg",
         "nev": "Ázsiai Arany Fényűzés",
         "leiras": "Prémium arany ragyogása ázsiai luxusérzettel párosul. Elegáns, gazdag megjelenést biztosít minden alkalomra.",
         "szarmazas": "azsia",
@@ -245,6 +254,7 @@
     {
         "id": 22,
         "kategoria": "karkoto",
+        "kep": "/karkotok/premiumezust.webp",
         "nev": "Afrikai Ezüst erő",
         "leiras": "Az afrikai kézművesség prémium ezüsttel ötvözve különleges, nemes hatást kelt. Ragyogása magabiztos, elegáns megjelenést ad.",
         "szarmazas": "afrika",
@@ -256,6 +266,7 @@
     {
         "id": 23,
         "kategoria": "karkoto",
+        "kep": "/karkotok/afrikapalladium.png",
         "nev": "Szavanna Palládiuma",
         "leiras": "Klasszikus afrikai formavilág és palládium elegancia találkozik ebben a harmonikus darabban. Letisztult, mégis erőteljes megjelenést biztosít.",
         "szarmazas": "afrika",
@@ -267,6 +278,7 @@
     {
         "id": 24,
         "kategoria": "karkoto",
+        "kep": "/karkotok/ezustegyedi.jpg",
         "nev": "Ezüst Törzsi Rejtély",
         "leiras": "Egyedi afrikai motívumokkal díszített ezüst karkötő, amely karakteres és különleges. Tökéletes választás azoknak, akik szeretik a művészi, egyedi darabokat.",
         "szarmazas": "afrika",

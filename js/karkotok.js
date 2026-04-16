@@ -1,39 +1,3 @@
-
-    localStorage.clear();
-    /*let mennyiseg = 0;
-    const gombok = document.getElementsByClassName('kosarba');
-
-   
-    for (let i = 0; i < gombok.length; i++) {
-
-        gombok[i].onclick = function (e) {
-            e.preventDefault();
-
-            const termek = {
-                id: this.dataset.id,
-                nev: this.dataset.nev,
-                ar: parseInt(this.dataset.ar),
-                
-            };
-            console.log(termek)
-
-            let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
-
-            const letezo = kosar.find(t => t.id == termek.id);
-
-            if (letezo) {
-                letezo.mennyiseg++;
-            } else {
-                kosar.push(termek);
-            }
-
-            localStorage.setItem('kosar', JSON.stringify(kosar));
-
-            alert("A termék a kosárba került!");
-        };
-    }
-
-*/
 document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("termekek-container");
     try {
@@ -42,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const termekek = await response.json();
 
     termekek.forEach(termek => {
-        if (termek.kategoria === "nyaklanc") {
+        if (termek.kategoria === "karkoto") {
             const card = document.createElement("div");
             card.className = "col-12 col-lg-6 col-xl-4 col-xxl-3 termek";
             card.innerHTML = `
