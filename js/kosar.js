@@ -1,4 +1,4 @@
-async function kosar() {
+/*async function kosar() {
     try {
         const res = await fetch("Json/kosar.json");
 
@@ -15,3 +15,17 @@ async function kosar() {
 }
 
 kosar();
+*/
+// Példa fetch kérés az oldal betöltésekor
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch('/getkosarjson'); // Lekérés a szerverről
+        if (!response.ok) {
+            throw new Error('Hiba történt az adatok lekérésekor.');
+        }
+        const termekek = await response.json(); // JSON válasz feldolgozása
+        console.log('Kosár tartalma:', termekek); // Kiírás a konzolra
+    } catch (error) {
+        console.error('Hiba történt:', error);
+    }
+});

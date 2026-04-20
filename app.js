@@ -67,6 +67,16 @@ app.post('/register', async (req, res) => {
     try {
         const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
 
+    }
+    catch (ex) {
+        console.log("Hiba: " + ex)
+    }
+   
+   
+   
+    /* try {
+        const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
+
 
 
 
@@ -152,6 +162,7 @@ app.post('/register', async (req, res) => {
         console.error('Reg hiba: ', e)
         return res.status(500).json({ sikeres: false, hibak: ['Szerver hiba történt. Próbáld újra később.'] });
     }
+        */
 })
 
 
@@ -210,20 +221,29 @@ app.listen(3000, () => {
     console.log('http://localhost:3000');
 })
 
-async function termekekbeolv() {
-    try{
-        const termekjson=await fs.readFile(KOSAR_FILE, 'utf-8')
-        const termekArr=JSON.parse(termekjson || '[]'); 
-        console.log("sikeres beolvasás:");
-        return termekArr;
-    }
-    catch(error){
-        console.error('Fájl olvasási hiba:', error);
-    }
-    console.log("sikeres beolvasás:");
-}
-app.get('/getkosarjson', (req, res)=>{
 
-    termekekbeolv();
-    res.json(termekekbeolv());
-})
+    async function termekekbeolv() {
+        try {
+            const termekjson = await fs.promises.readFile(KOSAR_FILE, 'utf-8');
+            const termekArr = JSON.parse(termekjson || '[]'); 
+            console.log("sikeres beolvasás:");
+            console.log(termekArr);
+            console.log(termekjson);
+            return termekArr;
+        } catch (error) {
+            console.error('Fájl olvasási hiba:', error);
+        }
+    }
+   
+
+    app.get('/getkosarjson', async (req, res) => {
+        try {
+            const termekek = await termekekbeolv();
+            console.log('Visszaküldött termékek:', termekek);
+            // Megvárja a termékek beolvasását
+            res.json(termekek); // JSON formátumban küldi vissza az adatokat
+        } catch (error) {
+            console.error('Hiba a kosár JSON lekérésekor:', error);
+            res.status(500).json({ error: 'Hiba történt a kosár adatainak lekérésekor.' });
+        }
+    });
