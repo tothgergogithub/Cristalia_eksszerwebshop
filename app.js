@@ -61,9 +61,7 @@ app.use(express.urlencoded({ extended: true }));
         res.sendFile(path.join(__dirname, "html", 'rolunk.html'));
     });
 }
-app.get('/getkosarjson', (req, res)=>{
 
-})
 
 app.post('/register', async (req, res) => {
     try {
@@ -224,25 +222,19 @@ app.listen(3000, () => {
 })
 
 async function termekekbeolv() {
-    
-    const termekjson=await fs.readFile(KOSAR_FILE, 'utf-8')
-    const temArr = JSON.parse(termekjson)
-    return temArr
-}
-
-app.get('/getDataCart', (req, res) => {
-    {
-        adat={
-            id : 10,
-            menniseg : 10
-    
-        }
+    try{
+        const termekjson=await fs.readFile(KOSAR_FILE, 'utf-8')
+        const termekArr=JSON.parse(termekjson || '[]'); 
+        console.log("sikeres beolvasás:");
+        return termekArr;
     }
+    catch(error){
+        console.error('Fájl olvasási hiba:', error);
+    }
+    console.log("sikeres beolvasás:");
+}
+app.get('/getkosarjson', (req, res)=>{
 
-    let termekid = termekekbeolv.find((item) => item == adat.id)
-    let mennyiseg = adat.menniseg
-
-    res.json({
-        
-    })
+    termekekbeolv();
+    res.json(termekekbeolv());
 })
