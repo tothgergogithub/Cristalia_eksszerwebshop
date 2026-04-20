@@ -69,6 +69,16 @@ app.post('/register', async (req, res) => {
     try {
         const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
 
+    }
+    catch (ex) {
+        console.log("Hiba: " + ex)
+    }
+   
+   
+   
+    /* try {
+        const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
+
 
 
 
@@ -154,6 +164,7 @@ app.post('/register', async (req, res) => {
         console.error('Reg hiba: ', e)
         return res.status(500).json({ sikeres: false, hibak: ['Szerver hiba történt. Próbáld újra később.'] });
     }
+        */
 })
 
 
@@ -215,4 +226,23 @@ app.listen(3000, () => {
 async function termekekbeolv() {
     
     const termekjson=await fs.readFile(KOSAR_FILE, 'utf-8')
+    const temArr = JSON.parse(termekjson)
+    return temArr
 }
+
+app.get('/getDataCart', (req, res) => {
+    {
+        adat={
+            id : 10,
+            menniseg : 10
+    
+        }
+    }
+
+    let termekid = termekekbeolv.find((item) => item == adat.id)
+    let mennyiseg = adat.menniseg
+
+    res.json({
+        
+    })
+})
