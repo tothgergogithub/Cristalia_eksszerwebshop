@@ -290,6 +290,7 @@
     {
         "id": 25,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/romantikus_aranygyűrű.jpg",
         "nev": "Aranyló Eskű",
         "leiras": "Romantikus európai stílusával az arany meleg ragyogását emeli ki. Finom, érzelmes darab, amely tökéletes választás különleges pillanatokhoz.",
         "szarmazas": "europa",
@@ -301,6 +302,7 @@
     {
         "id": 26,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/ezüstgyűrű.jpg",
         "nev": "Keleti Ezüst Tradició",
         "leiras": "Klasszikus ázsiai eleganciát hordozó ezüst gyűrű, amely időtlen harmóniát sugároz. Letisztult formája minden alkalomhoz illik.",
         "szarmazas": "azsia",
@@ -312,6 +314,7 @@
     {
         "id": 27,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/letisztult_aranygyuru.jpg",
         "nev": "Afriaki Arany Minimal",
         "leiras": "Az afrikai letisztultság és az arany természetes ragyogása tökéletes egyensúlyt alkot. Modern, egyszerű, mégis figyelemfelkeltő darab.",
         "szarmazas": "afrika",
@@ -323,6 +326,7 @@
     {
         "id": 28,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/titanumgyuru.jpg",
         "nev": "Titán Luxusvonal",
         "leiras": "A titánium prémium ereje amerikai modernitással párosul. Tartós, elegáns és határozott megjelenést biztosít.",
         "szarmazas": "amerika",
@@ -334,6 +338,7 @@
     {
         "id": 29,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/letisztultezust.jpg",
         "nev": "Ezüst Tisztaság",
         "leiras": "Európai minimalizmus és ezüstfény találkozik ebben a letisztult gyűrűben. Egyszerűsége miatt bármilyen stílushoz könnyedén illeszkedik.",
         "szarmazas": "europa",
@@ -345,6 +350,7 @@
     {
         "id": 30,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/kobalt.jpg",
         "nev": "Kobalt Törzsjegy",
         "leiras": "Afrikai ihletésű, egyedi kobalt gyűrű, amely karakteres és különleges megjelenést ad. Mély tónusai erőt és egyediséget sugároznak.",
         "szarmazas": "afrika",
@@ -356,6 +362,7 @@
     {
         "id": 31,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/ezustgyuru.jpg",
         "nev": "Holdfény Gyengédség",
         "leiras": "Romantikus ázsiai hangulatot idéző ezüst gyűrű, amely lágy csillogásával hódít. Finom részletei érzelmes, nőies megjelenést adnak.",
         "szarmazas": "azsia",
@@ -367,6 +374,7 @@
     {
         "id": 32,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/letisztult.jpg",
         "nev": "Titán Vonal",
         "leiras": "Amerikai letisztultság és titánium modern eleganciája találkozik benne. Könnyű, tartós és tökéletes választás a minimalista stílus kedvelőinek.",
         "szarmazas": "amerika",
@@ -378,6 +386,7 @@
     {
         "id": 33,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/egyedigyuru.jpg",
         "nev": "Arany Művészjegy",
         "leiras": "Egyedi európai formavilágú arany gyűrű, amely különleges karaktert ad viselőjének. Művészi részletei miatt igazán figyelemfelkeltő darab.",
         "szarmazas": "europa",
@@ -389,6 +398,7 @@
     {
         "id": 34,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/ezustromi.jpg",
         "nev": "Ezüst Szívfény",
         "leiras": "Romantikus afrikai hangulatot idéző ezüst gyűrű, amely lágy, érzelmes ragyogást áraszt. Finom kialakítása tökéletes választás szerelmes pillanatokhoz.",
         "szarmazas": "afrika",
@@ -400,6 +410,7 @@
     {
         "id": 35,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/palladium.avif",
         "nev": "Palládium Keleti Elegancia",
         "leiras": "A palládium különleges fénye klasszikus ázsiai stílusban kel életre. Letisztult, elegáns darab, amely időtálló szépséget képvisel.",
         "szarmazas": "ázsia",
@@ -411,6 +422,7 @@
     {
         "id": 36,
         "kategoria": "gyuru",
+        "kep": "/gyuruk/amerikai.jpg",
         "nev": "Ezüst Szerelemkör",
         "leiras": "Amerikai romantikát idéző ezüst gyűrű, amely finom csillogásával ragad magával. Érzelmes, lágy megjelenése különleges alkalmakhoz illik.",
         "szarmazas": "amerika",
@@ -422,6 +434,7 @@
     {
         "id": 37,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/aranyeuropa.jpg",
         "nev": "Aranyló Csillanás",
         "leiras": "Romantikus európai eleganciát sugárzó arany fülbevaló, amely lágy fényével azonnal magára vonja a tekintetet. Finom részletei nőies, érzelmes megjelenést adnak.",
         "szarmazas": "europa",
@@ -433,6 +446,7 @@
     {
         "id": 38,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/afrikaezust.webp",
         "nev": "Afrikai Ezüst Harmónia",
         "leiras": "Klasszikus afrikai formavilág és ezüst ragyogás találkozik ebben a kifinomult darabban. Letisztult eleganciája időtálló választássá teszi.",
         "szarmazas": "afrika",
@@ -444,6 +458,7 @@
     {
         "id": 39,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/aranyazsia.jpg",
         "nev": "Keleti Arany Minimal",
         "leiras": "Ázsiai letisztultság és aranyfény tökéletes harmóniája jellemzi ezt a modern fülbevalót. Egyszerűsége mégis különleges megjelenést biztosít.",
         "szarmazas": "azsia",
@@ -455,6 +470,7 @@
     {
         "id": 40,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/amerikatitanium.jpg",
         "nev": "Titán Klasszikus Vonal",
         "leiras": "A titánium ereje és az amerikai klasszikus stílus elegáns, tartós darabot eredményez. Letisztult formája minden alkalomhoz illik.",
         "szarmazas": "amerika",
@@ -466,6 +482,7 @@
     {
         "id": 41,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/europakobalt.jpg",
         "nev": "Kobalt Tisztaság",
         "leiras": "Európai minimalizmus és kobalt modern tónusa alkot különleges, letisztult fülbevalót. Erőteljes, mégis elegáns megjelenést ad.",
         "szarmazas": "europa",
@@ -477,6 +494,7 @@
     {
         "id": 42,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/afrikaiarany.webp",
         "nev": "Arany Törzsfény",
         "leiras": "Afrikai ihletésű, egyedi arany fülbevaló, amely karakteres és művészi megjelenést biztosít. Részletei különleges energiát sugároznak.",
         "szarmazas": "afrika",
@@ -488,6 +506,7 @@
     {
         "id": 43,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/azsiaezust.webp",
         "nev": "Ezüst Selyemfény",
         "leiras": "Romantikus ázsiai hangulatot idéző ezüst fülbevaló, amely lágy csillogásával hódít. Finom, nőies darab, amely minden arcformát kiemel.",
         "szarmazas": "azsia",
@@ -499,6 +518,7 @@
     {
         "id": 44,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/palladiumpremium.jpg",
         "nev": "Palládium Prestige",
         "leiras": "A palládium prémium ragyogása amerikai eleganciával társul. Luxus hatású, modern fülbevaló, amely azonnal kiemeli viselőjét.",
         "szarmazas": "amerika",
@@ -510,6 +530,7 @@
     {
         "id": 45,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/kobaltkek.jpg",
         "nev": "Kobalt Minimal Aura",
         "leiras": "Letisztult európai formavilág és kobalt modern tónusa alkot harmonikus, elegáns darabot. Minimalista, mégis feltűnő választás.",
         "szarmazas": "europa",
@@ -521,6 +542,7 @@
     {
         "id": 46,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/ezustpremium.jpg",
         "nev": "Keleti Ezüst Luxus",
         "leiras": "Prémium ezüstből készült ázsiai stílusú fülbevaló, amely gazdag fényével tűnik ki. Elegáns, kifinomult megjelenést biztosít.",
         "szarmazas": "ázsia",
@@ -532,6 +554,7 @@
     {
         "id": 47,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/palladiumklasszikus.jpg",
         "nev": "Palládium Klasszikus Kör",
         "leiras": "Amerikai klasszikus stílus és palládium ragyogás találkozik ebben az időtlen darabban. Letisztult formája elegáns, visszafogott fényt ad.",
         "szarmazas": "amerika",
@@ -543,6 +566,7 @@
     {
         "id": 48,
         "kategoria": "fulbevalo",
+        "kep": "/fulbevalok/afrikaiezust.webp",
         "nev": "Afrikai Ezüst Vonal",
         "leiras": "Letisztult afrikai dizájn és ezüst csillogás alkot modern, harmonikus fülbevalót. Könnyed, mégis karakteres kiegészítő.",
         "szarmazas": "afrika",
