@@ -67,6 +67,16 @@ app.post('/register', async (req, res) => {
     try {
         const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
 
+    }
+    catch (ex) {
+        console.log("Hiba: " + ex)
+    }
+   
+   
+   
+    /* try {
+        const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
+
 
 
 
@@ -152,6 +162,7 @@ app.post('/register', async (req, res) => {
         console.error('Reg hiba: ', e)
         return res.status(500).json({ sikeres: false, hibak: ['Szerver hiba történt. Próbáld újra később.'] });
     }
+        */
 })
 
 
