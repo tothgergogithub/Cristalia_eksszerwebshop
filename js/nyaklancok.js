@@ -46,7 +46,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             const card = document.createElement("div");
             card.className = "col-12 col-lg-6 col-xl-4 col-xxl-3 termek";
             card.innerHTML = `
-                <div class="card mx-auto d-block" style="width: 18rem;">
+                <div class="card mx-auto d-block" style="width: 18rem;"
+                    data-origin="${termek.szarmazas}" 
+                    data-style="${termek.stilus}" 
+                    data-carat="${termek.karat}" 
+                    data-anyag="${termek.anyag}" 
+                    data-price="${termek.ar}">
                 <img src="${termek.kep}" class="card-img-top kartyakep" alt="${termek.nev}">
                 <div class="card-body">
                     <h5 class="card-title">${termek.nev}</h5>

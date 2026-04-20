@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let anyagFilters = document.querySelectorAll('.data-anyag');
   let priceRange = document.querySelector('.data-price');
   let rangeValue = document.getElementById('rangeValue');
-  let products = document.querySelectorAll('.termek');
+  
   
   if (priceRange && rangeValue) {
     updateRangeValue();
@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function applyFilters() {
+    let products = document.querySelectorAll('.termek');
+    
     let selectedOrigins = Array.from(originFilters)
       .filter(f => f.checked)
       .map(f => f.value);
