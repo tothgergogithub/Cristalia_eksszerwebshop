@@ -236,7 +236,7 @@ app.listen(3000, () => {
     }
    
 
-    app.get('/getkosarjson', async (req, res) => {
+    app.get('/getkosarjson', async ( _req, res) => {
         try {
             const termekek = await termekekbeolv();
             console.log('Visszaküldött termékek:', termekek);
