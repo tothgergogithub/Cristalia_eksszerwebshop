@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { error } = require('console');
 const session = require('express-session');
+const { json } = require('stream/consumers');
 const app = express();
 
 
@@ -64,40 +65,43 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.post('/register', async (req, res) => {
+    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
+    let hibak = [];
+
+    //email-check
+    const allowedDomains = ['gmail.com', 'freemail.com', 'hotmail.com', 'outlook.com'];
+    const emailMatch = email.trim().toLowerCase().match(/^([^@]+)@([^@]+)$/);
+    if (!emailMatch || !allowedDomains.includes(emailMatch[2])) {
+        hibak.push('Hibás e-mail szolgáltató!');
+        res.json({ reg: false, ex: 'Hibás e-mail szolgáltató!' })
+    }
+    const phone = String(telefon).trim();
+    if (!/^\d+$/.test(phone)) {
+        hibak.push('A telefonszám csak számokat tartalmazhat!');
+        res.json({reg : false, ex : 'A telefonszám csak számokat tartalmazhat!'}) 
+    } else if (phone.length < 11 || phone.length > 13) {
+        hibak.push('Hibás a telefonszám hossza!');
+        res.json({reg : false, ex : 'Hibás a telefonszám hossza.'}) 
+
+    }
+
+
+
+    res.json({ reg: true, ex: '' })
+    return res.redirect('/regisztracio.html')
     try {
-        const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
 
     }
     catch (ex) {
         console.log("Hiba: " + ex)
     }
-   
-   
-   
+
+
+
     /* try {
         const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
 
-
-
-
-        let hibak = [];
-
-
-
-
-
-        // 2. Üres mezők ellenőrzése
-        if (!vezeteknev || !keresznev || !email || !telefon || !jelszo || !jelszoismet) {
-            return res.status(400).send("Minden mezőt ki kell tölteni!");
-        }
-
-        // 3. Email validáció
-        const allowedDomains = ['gmail.com', 'freemail.com', 'hotmail.com', 'outlook.com'];
-        const emailMatch = String(email).trim().toLowerCase().match(/^([^@]+)@([^@]+)$/);
-        if (!emailMatch || !allowedDomains.includes(emailMatch[2])) {
-            hibak.push('Hibás e-mail szolgáltató!');
-        }
-
+       
         // 4. Telefonszám validáció
         const phone = String(telefon).trim();
         if (!/^\d+$/.test(phone)) {
@@ -222,28 +226,28 @@ app.listen(3000, () => {
 })
 
 
-    async function termekekbeolv() {
-        try {
-            const termekjson = await fs.promises.readFile(KOSAR_FILE, 'utf-8');
-            const termekArr = JSON.parse(termekjson || '[]'); 
-            console.log("sikeres beolvasás:");
-            console.log(termekArr);
-            console.log(termekjson);
-            return termekArr;
-        } catch (error) {
-            console.error('Fájl olvasási hiba:', error);
-        }
+async function termekekbeolv() {
+    try {
+        const termekjson = await fs.promises.readFile(KOSAR_FILE, 'utf-8');
+        const termekArr = JSON.parse(termekjson || '[]');
+        console.log("sikeres beolvasás:");
+        console.log(termekArr);
+        console.log(termekjson);
+        return termekArr;
+    } catch (error) {
+        console.error('Fájl olvasási hiba:', error);
     }
-   
+}
 
-    app.get('/getkosarjson', async (req, res) => {
-        try {
-            const termekek = await termekekbeolv();
-            console.log('Visszaküldött termékek:', termekek);
-            // Megvárja a termékek beolvasását
-            res.json(termekek); // JSON formátumban küldi vissza az adatokat
-        } catch (error) {
-            console.error('Hiba a kosár JSON lekérésekor:', error);
-            res.status(500).json({ error: 'Hiba történt a kosár adatainak lekérésekor.' });
-        }
-    });
+
+app.get('/getkosarjson', async (req, res) => {
+    try {
+        const termekek = await termekekbeolv();
+        console.log('Visszaküldött termékek:', termekek);
+        // Megvárja a termékek beolvasását
+        res.json(termekek); // JSON formátumban küldi vissza az adatokat
+    } catch (error) {
+        console.error('Hiba a kosár JSON lekérésekor:', error);
+        res.status(500).json({ error: 'Hiba történt a kosár adatainak lekérésekor.' });
+    }
+});
