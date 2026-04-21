@@ -1,13 +1,12 @@
 
     localStorage.clear();
-    /*let mennyiseg = 0;
+    let mennyiseg = 0;
     const gombok = document.getElementsByClassName('kosarba');
 
    
     for (let i = 0; i < gombok.length; i++) {
 
         gombok[i].onclick = function (e) {
-            e.preventDefault();
 
             const termek = {
                 id: this.dataset.id,
@@ -32,8 +31,6 @@
             alert("A termék a kosárba került!");
         };
     }
-
-*/
 document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("termekek-container");
     try {
@@ -45,20 +42,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (termek.kategoria === "nyaklanc") {
             const card = document.createElement("div");
             card.className = "col-12 col-lg-6 col-xl-4 col-xxl-3 termek";
+
+            card.setAttribute('data-origin', termek.szarmazas);
+            card.setAttribute('data-style', termek.stilus);
+            card.setAttribute('data-carat', termek.karat);
+            card.setAttribute('data-anyag', termek.anyag);
+            card.setAttribute('data-price', termek.ar);
+
             card.innerHTML = `
-                <div class="card mx-auto d-block" style="width: 18rem;"
-                    data-origin="${termek.szarmazas}" 
-                    data-style="${termek.stilus}" 
-                    data-carat="${termek.karat}" 
-                    data-anyag="${termek.anyag}" 
-                    data-price="${termek.ar}">
-                <img src="${termek.kep}" class="card-img-top kartyakep" alt="${termek.nev}">
-                <div class="card-body">
-                    <h5 class="card-title">${termek.nev}</h5>
-                    <p class="card-text">${termek.leiras}</p>
-                    <p class="card-price">${"Ár: " + termek.ar + "Ft"}</p>
-                    <a href="kosar.html" class="btn btn-primary kosarba" data-id="${termek.id}" data-nev="${termek.nev}" data-ar="${termek.ar}">Kosárba</a>
-                </div>
+                <div class="card mx-auto d-block" style="width: 18rem;">
+                    <img src="${termek.kep}" class="card-img-top kartyakep" alt="${termek.nev}">
+                    <div class="card-body">
+                        <h5 class="card-title">${termek.nev}</h5>
+                        <p class="card-text">${termek.leiras}</p>
+                        <p class="card-price">${"Ár: " + termek.ar + "Ft"}</p>
+                        <button href="kosar.html" class="btn btn-primary kosarba" data-id="${termek.id}" data-nev="${termek.nev}" data-ar="${termek.ar}">Kosárba</button>
+                    </div>
                 </div>
             `;
             container.appendChild(card);
