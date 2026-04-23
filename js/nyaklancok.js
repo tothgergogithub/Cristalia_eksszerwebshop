@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const response = await fetch("./kosar.json");
         if (!response.ok) throw new Error("Nem sikerült betölteni a kosar.json fájlt.");
-        const termekek = await response.json(); //asd
+        const termekek = await response.json(); 
 
         termekek.forEach(termek => {
             if (termek.kategoria === "nyaklanc") {
@@ -47,9 +47,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else {
                 kosar.push(termek);
             }
+            // ...existing code...
             localStorage.setItem('kosar', JSON.stringify(kosar));
-            alert("A termék a kosárba került!");
++            e.preventDefault(); // először megakadályozzuk az alapértelmezett viselkedést
++            alert("A termék a kosárba került!"); // blokkoló értesítés, a felhasználó bezárja
++            window.location.href `/kosar.html?id=${encodeURIComponent(termek.id)}`; // majd átirányítás
+// ...existing code...
         });
+           
 
     } catch (error) {
         console.error("Hiba történt:", error);
