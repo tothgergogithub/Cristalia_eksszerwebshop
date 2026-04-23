@@ -64,111 +64,22 @@ app.use(express.urlencoded({ extended: true }));
 }
 
 
-app.post('/register', async (req, res) => {
-    const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
-    let hibak = [];
-
-    //email-check
+app.post('/register', (req, res) => {
+    const { vezeteknev,keresznev, email, telefon,jelszo, jelszoismet } = req.body
+    hibak = []
     const allowedDomains = ['gmail.com', 'freemail.com', 'hotmail.com', 'outlook.com'];
-    const emailMatch = email.trim().toLowerCase().match(/^([^@]+)@([^@]+)$/);
+    const emailTrim = String(email).trim().toLowerCase();
+    const emailMatch = emailTrim.match(/^([^@]+)@([^@]+)$/);
     if (!emailMatch || !allowedDomains.includes(emailMatch[2])) {
         hibak.push('Hibás e-mail szolgáltató!');
-        res.json({ reg: false, ex: 'Hibás e-mail szolgáltató!' })
     }
-    const phone = String(telefon).trim();
-    if (!/^\d+$/.test(phone)) {
+    const phoneTrim = String(telefon).trim();
+    if (!/^\d+$/.test(phone)){
         hibak.push('A telefonszám csak számokat tartalmazhat!');
-        res.json({reg : false, ex : 'A telefonszám csak számokat tartalmazhat!'}) 
-    } else if (phone.length < 11 || phone.length > 13) {
-        hibak.push('Hibás a telefonszám hossza!');
-        res.json({reg : false, ex : 'Hibás a telefonszám hossza.'}) 
-
+    } else if (phoneTrim.length < 11 || phoneTrim.length > 13) {
+        hibak.push('A telefonszám hossza 11-13 karakter között kell legyen!');
     }
-
-
-
-    res.json({ reg: true, ex: '' })
-    return res.redirect('/regisztracio.html')
-    try {
-
-    }
-    catch (ex) {
-        console.log("Hiba: " + ex)
-    }
-
-
-
-    /* try {
-        const { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body;
-
-       
-        // 4. Telefonszám validáció
-        const phone = String(telefon).trim();
-        if (!/^\d+$/.test(phone)) {
-            hibak.push('A telefonszám csak számokat tartalmazhat!');
-        } else if (phone.length < 11 || phone.length > 13) {
-            hibak.push('Hibás a telefonszám hossza!');
-        }
-
-        // 5. Jelszó validáció
-        const validJelszo = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
-        if (jelszo !== jelszoismet) {
-            hibak.push('A jelszavak nem egyeznek.');
-        }
-        else if (!validJelszo.test(jelszo)) {
-            hibak.push('A jelszó túl gyenge.')
-        }
-
-        if (hibak.length > 0) {
-            return res.status(400).json({ sikeres: false, hibak });
-        }
-
-        let jsonArr = [];
-        try {
-            const usersjson = await fs.readFile(REG_FILE, 'utf-8');
-            jsonArr = JSON.parse(usersjson || '[]');
-            if (!Array.isArray(jsonArr)) jsonArr = [];
-        } catch (err) {
-            if (err.code !== 'ENOENT') {
-                console.error('Fájl olvasási hiba:', err);
-                return res.status(500).json({ sikeres: false, hibak: ['Szerver hiba: nem sikerült beolvasni a felhasználói adatokat.'] });
-            }
-        }
-
-
-        const emailLower = String(email).trim().toLowerCase();
-        const already = jsonArr.find(u => (u.emailcim && u.emailcim.toLowerCase() === emailLower) || (u.telefonszam && u.telefonszam === phone));
-        if (already) {
-            return res.status(400).json({ sikeres: false, hibak: ['Már létezik felhasználó ezzel az e-mail címmel vagy telefonszámmal.'] });
-        }
-
-
-        const newId = (jsonArr.length > 0) ? Math.max(...jsonArr.map(u => u.id || 0)) + 1 : 1;
-        const regisztralo = {
-            id: newId,
-            vezeteknev: String(vezeteknev).trim(),
-            keresznev: String(keresznev).trim(),
-            emailcim: emailLower,
-            telefonszam: phone,
-            passwordHash: jelszo,
-        };
-
-
-        jsonArr.push(regisztralo);
-        await fs.writeFile(REG_FILE, JSON.stringify(jsonArr, null, 2), 'utf-8');
-        req.session.user = {
-            id: regisztralo.id,
-            username: regisztralo.emailcim
-        };
-        return res.redirect('/');
-    }
-    catch (e) {
-        console.error('Reg hiba: ', e)
-        return res.status(500).json({ sikeres: false, hibak: ['Szerver hiba történt. Próbáld újra később.'] });
-    }
-        */
-})
-
+ })
 
 app.post('/login', (req, res) => {
 
