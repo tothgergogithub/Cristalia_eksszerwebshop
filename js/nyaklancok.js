@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const response = await fetch("./kosar.json");
         if (!response.ok) throw new Error("Nem sikerült betölteni a kosar.json fájlt.");
-        const termekek = await response.json();
+        const termekek = await response.json(); //asd
 
         termekek.forEach(termek => {
             if (termek.kategoria === "nyaklanc") {
