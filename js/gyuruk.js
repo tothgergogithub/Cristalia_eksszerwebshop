@@ -28,9 +28,29 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
             `;
             container.appendChild(card);
-    }});
-    } 
-    catch (error) {
-        console.error("Hiba történt:", error);
     }
+});
+container.addEventListener('click', (e) => {
+    const btn = e.target.closest('.kosarba');
+    if (!btn) return;
+    const termek = {
+        id: btn.dataset.id,
+        nev: btn.dataset.nev,
+        ar: parseInt(btn.dataset.ar, 10),
+        mennyiseg: 1
+    };
+    let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
+    const letezo = kosar.find(t => t.id == termek.id);
+    if (letezo) {
+        letezo.mennyiseg = (letezo.mennyiseg || 1) + 1;
+    } else {
+        kosar.push(termek);
+    }
+    localStorage.setItem('kosar', JSON.stringify(kosar));
+    alert("A termék a kosárba került!");
+});
+
+} catch (error) {
+console.error("Hiba történt:", error);
+}
 });

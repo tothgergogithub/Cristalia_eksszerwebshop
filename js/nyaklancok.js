@@ -1,69 +1,57 @@
-
-    localStorage.clear();
-    let mennyiseg = 0;
-    const gombok = document.getElementsByClassName('kosarba');
-
-   
-    for (let i = 0; i < gombok.length; i++) {
-
-        gombok[i].onclick = function (e) {
-
-            const termek = {
-                id: this.dataset.id,
-                nev: this.dataset.nev,
-                ar: parseInt(this.dataset.ar),
-                
-            };
-            console.log(termek)
-
-            let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
-
-            const letezo = kosar.find(t => t.id == termek.id);
-
-            if (letezo) {
-                letezo.mennyiseg++;
-            } else {
-                kosar.push(termek);
-            }
-
-            localStorage.setItem('kosar', JSON.stringify(kosar));
-
-            alert("A termék a kosárba került!");
-        };
-    }
 document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("termekek-container");
     try {
-    const response = await fetch("./kosar.json");
-    if (!response.ok) throw new Error("Nem sikerült betölteni a kosar.json fájlt.");
-    const termekek = await response.json();
+        const response = await fetch("./kosar.json");
+        if (!response.ok) throw new Error("Nem sikerült betölteni a kosar.json fájlt.");
+        const termekek = await response.json(); //asd
 
-    termekek.forEach(termek => {
-        if (termek.kategoria === "nyaklanc") {
-            const card = document.createElement("div");
-            card.className = "col-12 col-lg-6 col-xl-4 col-xxl-3 termek";
+        termekek.forEach(termek => {
+            if (termek.kategoria === "nyaklanc") {
+                const card = document.createElement("div");
+                card.className = "col-12 col-lg-6 col-xl-4 col-xxl-3 termek";
+                card.setAttribute('data-origin', termek.szarmazas);
+                card.setAttribute('data-style', termek.stilus);
+                card.setAttribute('data-carat', termek.karat);
+                card.setAttribute('data-anyag', termek.anyag);
+                card.setAttribute('data-price', termek.ar);
 
-            card.setAttribute('data-origin', termek.szarmazas);
-            card.setAttribute('data-style', termek.stilus);
-            card.setAttribute('data-carat', termek.karat);
-            card.setAttribute('data-anyag', termek.anyag);
-            card.setAttribute('data-price', termek.ar);
-
-            card.innerHTML = `
-                <div class="card mx-auto d-block" style="width: 18rem;">
-                    <img src="${termek.kep}" class="card-img-top kartyakep" alt="${termek.nev}">
-                    <div class="card-body">
-                        <h5 class="card-title">${termek.nev}</h5>
-                        <p class="card-text">${termek.leiras}</p>
-                        <p class="card-price">${"Ár: " + termek.ar + "Ft"}</p>
-                        <button href="kosar.html" class="btn btn-primary kosarba" data-id="${termek.id}" data-nev="${termek.nev}" data-ar="${termek.ar}">Kosárba</button>
+                card.innerHTML = `
+                    <div class="card mx-auto d-block" style="width: 18rem;">
+                        <img src="${termek.kep}" class="card-img-top kartyakep" alt="${termek.nev}">
+                        <div class="card-body">
+                            <h5 class="card-title">${termek.nev}</h5>
+                            <p class="card-text">${termek.leiras}</p>
+                            <p class="card-price">${"Ár: " + termek.ar + "Ft"}</p>
+                            <button class="btn btn-primary kosarba" data-id="${termek.id}" data-nev="${termek.nev}" data-ar="${termek.ar}">Kosárba</button>
+                        </div>
                     </div>
-                </div>
-            `;
-            container.appendChild(card);
-    }});
-    } 
-    catch (error) {
+                `;
+                container.appendChild(card);
+            }
+        });
+
+        
+        container.addEventListener('click', (e) => {
+            const btn = e.target.closest('.kosarba');
+            if (!btn) return;
+            const termek = {
+                id: btn.dataset.id,
+                nev: btn.dataset.nev,
+                ar: parseInt(btn.dataset.ar, 10),
+                mennyiseg: 1
+            };
+            let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
+            const letezo = kosar.find(t => t.id == termek.id);
+            if (letezo) {
+                letezo.mennyiseg = (letezo.mennyiseg || 1) + 1;
+            } else {
+                kosar.push(termek);
+            }
+            localStorage.setItem('kosar', JSON.stringify(kosar));
+            alert("A termék a kosárba került!");
+        });
+
+    } catch (error) {
         console.error("Hiba történt:", error);
     }
 });

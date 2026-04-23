@@ -151,14 +151,14 @@ async function termekekbeolv() {
 }
 
 
-app.get('/getkosarjson', async (req, res) => {
-    try {
-        const termekek = await termekekbeolv();
-        console.log('Visszaküldött termékek:', termekek);
-        // Megvárja a termékek beolvasását
-        res.json(termekek); // JSON formátumban küldi vissza az adatokat
-    } catch (error) {
-        console.error('Hiba a kosár JSON lekérésekor:', error);
-        res.status(500).json({ error: 'Hiba történt a kosár adatainak lekérésekor.' });
-    }
-});
+    app.get('/getkosarjson', async (req, res) => {
+        try {
+            const termekek = await termekekbeolv();
+            console.log('Visszaküldött termékek:', termekek);
+            // Megvárja a termékek beolvasását
+            res.json(termekek); // JSON formátumban küldi vissza az adatokat
+        } catch (error) {
+            console.error('Hiba a kosár JSON lekérésekor:', error);
+            res.status(500).json({ error: 'Hiba történt a kosár adatainak lekérésekor.' });
+        }
+    });
