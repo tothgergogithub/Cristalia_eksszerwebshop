@@ -33,3 +33,16 @@ async function loadNavbar() {
 
 loadNavbar()
 
+
+
+let regBtn = document.getElementById('regBtn')
+regBtn.addEventListener("click", async () => {
+    const incoming = await fetch("/register")
+    const hiba = await incoming.json()
+    if (hiba.reg == false) {
+        alert(hiba.ex)
+    }
+    alert(hiba.ex)
+    
+})
+
