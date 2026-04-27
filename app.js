@@ -65,20 +65,50 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.post('/register', (req, res) => {
-    const { vezeteknev,keresznev, email, telefon,jelszo, jelszoismet } = req.body
-    hibak = []
-    const allowedDomains = ['gmail.com', 'freemail.com', 'hotmail.com', 'outlook.com'];
-    const emailTrim = String(email).trim().toLowerCase();
-    const emailMatch = emailTrim.match(/^([^@]+)@([^@]+)$/);
-    if (!emailMatch || !allowedDomains.includes(emailMatch[2])) {
-        hibak.push('Hibás e-mail szolgáltató!');
+    let {vezeteknev, keresznev, email, telefon, jelszo, jelszoismet} = req.body
+    let ex = []
+
+
+    // email check
+   
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    if (!emailRegex.test(email)){
+        ex.push("Az email nem megfelelő")
     }
-    const phoneTrim = String(telefon).trim();
-    if (!/^\d+$/.test(phone)){
-        hibak.push('A telefonszám csak számokat tartalmazhat!');
-    } else if (phoneTrim.length < 11 || phoneTrim.length > 13) {
-        hibak.push('A telefonszám hossza 11-13 karakter között kell legyen!');
+    // telefonszam
+    if (!/^\d+$/.test(telefon)) {
+        ex.push("A telefonszám csak szám lehet")
+
+    }else if (!telefon.length <11 || telefon.length>13){
+        ex.push("A telefonszám hossza nem megfelelő.")
     }
+
+    // jelszó check
+    const passwordCheck = /^[a-zA-Z0-9!@#$%^&*]{8,}$/
+    const passwordCheckSpecial = /(?=.*[!@#$%^&*])/
+    const passwordCheckLength =/(?=.*[0-9])/
+    if(!passwordCheck.test(jelszo)) {
+        
+    }
+
+
+
+
+
+
+
+
+
+    /*
+    if (jelszo !== jelszoismet) {
+        hibak.push('A jelszavak nem egyeznek!');
+    } else if (jelszo.length < 8) {
+        hibak.push('A jelszónak legalább 8 karakter hosszúnak kell lennie!');
+    } else if (!/(?=.*[a-z])/.test(jelszo)) {
+        hibak.push('A jelszónak tartalmaznia kell legalább egy kisbetűt!');
+    }*/
+
+    // !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(jelszo || '')
  })
 
 app.post('/login', (req, res) => {
@@ -132,9 +162,6 @@ app.get('/logout', (req, res) => {
 });
 
 
-app.listen(3000, () => {
-    console.log('http://localhost:3000');
-})
 
 
 async function termekekbeolv() {
@@ -151,14 +178,17 @@ async function termekekbeolv() {
 }
 
 
-    app.get('/getkosarjson', async (req, res) => {
-        try {
-            const termekek = await termekekbeolv();
-            console.log('Visszaküldött termékek:', termekek);
-            // Megvárja a termékek beolvasását
-            res.json(termekek); // JSON formátumban küldi vissza az adatokat
-        } catch (error) {
-            console.error('Hiba a kosár JSON lekérésekor:', error);
-            res.status(500).json({ error: 'Hiba történt a kosár adatainak lekérésekor.' });
-        }
-    });
+app.get('/getkosarjson', async (req, res) => {
+    try {
+        const termekek = await termekekbeolv();
+        console.log('Visszaküldött termékek:', termekek);
+        // Megvárja a termékek beolvasását
+        res.json(termekek); // JSON formátumban küldi vissza az adatokat
+    } catch (error) {
+        console.error('Hiba a kosár JSON lekérésekor:', error);
+        res.status(500).json({ error: 'Hiba történt a kosár adatainak lekérésekor.' });
+    }
+});
+    app.listen(3000, () => {
+        console.log('http://localhost:3000');
+    })
