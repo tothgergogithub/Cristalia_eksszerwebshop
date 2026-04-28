@@ -4,6 +4,7 @@ const fs = require('fs');
 const { error } = require('console');
 const session = require('express-session');
 const { json } = require('stream/consumers');
+const e = require('express');
 const app = express();
 
 
@@ -63,38 +64,46 @@ app.use(express.urlencoded({ extended: true }));
     });
 }
 
-
-app.post('/register', (req, res) => {
-    let {vezeteknev, keresznev, email, telefon, jelszo, jelszoismet} = req.body
-    let ex = []
-
-
-    // email check
-   
+async function validateData(data) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    if (!emailRegex.test(email)){
+    const passwordCheck = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
+    let ex = []
+    
+    // email check
+    if (!emailRegex.test(data.email)) {
         ex.push("Az email nem megfelelő")
     }
     // telefonszam
-    if (!/^\d+$/.test(telefon)) {
+    if (!/^\d+$/.test(data.telefon)) {
         ex.push("A telefonszám csak szám lehet")
 
-    }else if (!telefon.length <11 || telefon.length>13){
+
+    } 
+    if (data.telefon.length < 11 || data.telefon.length > 13) {
         ex.push("A telefonszám hossza nem megfelelő.")
     }
 
     // jelszó check
-    const passwordCheck = /^[a-zA-Z0-9!@#$%^&*]{8,}$/
-    const passwordCheckSpecial = /(?=.*[!@#$%^&*])/
-    const passwordCheckLength =/(?=.*[0-9])/
-    if(!passwordCheck.test(jelszo)) {
+    if (!passwordCheck.test(data.jelszo) && data.jelszo !== data.jelszoismet) {
+        ex.push("A jelszó nem megfelelő.")
+    }
+    return ex
+}
+app.post('/register', async (req, res) => {
+    let data = { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body
+    
+    let exeptions = []
+    exeptions = (await validateData(data))
+    
+    if (exeptions.length ==0){
         
     }
+    
+    
 
 
 
-
-
+    
 
 
 
@@ -109,7 +118,7 @@ app.post('/register', (req, res) => {
     }*/
 
     // !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(jelszo || '')
- })
+})
 
 app.post('/login', (req, res) => {
 
@@ -189,6 +198,6 @@ app.get('/getkosarjson', async (req, res) => {
         res.status(500).json({ error: 'Hiba történt a kosár adatainak lekérésekor.' });
     }
 });
-    app.listen(3000, () => {
-        console.log('http://localhost:3000');
-    })
+app.listen(3000, () => {
+    console.log('http://localhost:3000');
+})
