@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const btn = e.target.closest('.kosarba');
             if (!btn) return;
             const termek = {
-                id: btn.dataset.id,
+                id: String(btn.dataset.id),
                 nev: btn.dataset.nev,
                 ar: parseInt(btn.dataset.ar, 10),
                 mennyiseg: 1
@@ -43,16 +43,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
             const letezo = kosar.find(t => t.id == termek.id);
             if (letezo) {
-                letezo.mennyiseg = (letezo.mennyiseg || 1) + 1;
+                letezo.mennyiseg = (Number(letezo.mennyiseg) || 0) + 1;
+             
             } else {
                 kosar.push(termek);
             }
-            // ...existing code...
+           // ...existing code...
+            // mentés localStorage-be
             localStorage.setItem('kosar', JSON.stringify(kosar));
-+            e.preventDefault(); // először megakadályozzuk az alapértelmezett viselkedést
-+            alert("A termék a kosárba került!"); // blokkoló értesítés, a felhasználó bezárja
-+            window.location.href `/kosar.html?id=${encodeURIComponent(termek.id)}`; // majd átirányítás
-// ...existing code...
+            // megakadályozzuk az alapértelmezett viselkedést (ha gomb submit lenne)
+            e.preventDefault();
+            // blokkoló értesítés
+            alert("A termék a kosárba került!");
+            // átirányítás a kosár oldalra az adott termék id-jával
+            window.location.href = `/kosar.html?id=${encodeURIComponent(termek.id)}`;
         });
            
 
@@ -60,3 +64,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Hiba történt:", error);
     }
 });
+
