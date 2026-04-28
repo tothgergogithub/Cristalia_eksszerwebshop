@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id'); 
+    
 
     try {
-        
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id'); 
         const response = await fetch('/getkosarjson');
         let termekek = [];
         if (response.ok) {
