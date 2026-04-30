@@ -96,7 +96,19 @@ app.post('/register', async (req, res) => {
     exeptions = (await validateData(data))
     
     if (exeptions.length ==0){
+        //return res.json({exeptions : 0})
+        const regJson = fs.readFileSync(REG_FILE, (err, content) => {
+            if (err) {
+                return res.status(500).send("Fájlbeolvasási hiba: " + err)
+            }
+        })
+
+        let regObj = JSON.parse(regJson)
+        regObj.push(data)
+
+        fs.writeFileSync(REG_FILE, JSON.stringify(regObj))
         
+        return res.json(regObj)
     }
     
     
