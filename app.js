@@ -61,7 +61,7 @@ const KOSAR_FILE = path.join(__dirname, 'kosar.json');
 
 async function validateRegistrationData(data) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    const passwordCheck = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
+    const passwordCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
     let ex = []
 
 
@@ -78,17 +78,20 @@ async function validateRegistrationData(data) {
         ex.push("A telefonszám hossza nem megfelelő.")
     }
 
-    if (!passwordCheck.test(data.jelszo) && data.jelszo !== data.jelszoismet) {
+    if (!passwordCheck.test(data.jelszo) ) {
         ex.push("A jelszó nem megfelelő.")
+    }
+    if(data.jelszo !== data.jelszoismet){
+        ex.push("Jelszó nem egyezik")
     }
     return ex
 }
 app.post('/register', async (req, res) => {
-    let data = { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body
+    let data = req.body
 
     let exeptions = []
-    exeptions = (await validateRegistrationData(data))
-
+    exeptions = await validateRegistrationData(data)
+    
     if (exeptions.length == 0) {
 
         const regJson = fs.readFileSync(REG_FILE, (err, content) => {
@@ -114,12 +117,14 @@ app.post('/register', async (req, res) => {
 
         return res.redirect('/')
     }
-
+    else {
+        
+    }
 
 
 })
 
-async function validateLoginData(data, users) {
+function validateLoginData(data, users) {
     
     let searchUser;
     if(/\D/.test(data.username)){
@@ -133,7 +138,9 @@ async function validateLoginData(data, users) {
 
 app.post('/login', async (req, res) => {
     
-    const data = req.body
+
+
+    const data = await req.body
     const USERS = JSON.parse(fs.readFileSync('reg.json', "utf-8"));
     let exeptions = []
     
