@@ -22,14 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 const REG_FILE = path.join(__dirname, 'reg.json');
 const KOSAR_FILE = path.join(__dirname, 'kosar.json');
 
-/*
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-*/
 
-//ez a kód később implementálva lessz
 { //app.get reqestek a navigációhoz
     app.get('/', (req, res) => {
         res.sendFile(path.join(__dirname, "html", 'index.html'));
@@ -64,26 +59,25 @@ app.use(express.urlencoded({ extended: true }));
     });
 }
 
-async function validateData(data) {
+async function validateRegistrationData(data) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const passwordCheck = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
     let ex = []
-    
-    // email check
+
+
     if (!emailRegex.test(data.email)) {
         ex.push("Az email nem megfelelő")
     }
-    // telefonszam
+
     if (!/^\d+$/.test(data.telefon)) {
         ex.push("A telefonszám csak szám lehet")
 
 
-    } 
+    }
     if (data.telefon.length < 11 || data.telefon.length > 13) {
         ex.push("A telefonszám hossza nem megfelelő.")
     }
 
-    // jelszó check
     if (!passwordCheck.test(data.jelszo) && data.jelszo !== data.jelszoismet) {
         ex.push("A jelszó nem megfelelő.")
     }
@@ -91,74 +85,60 @@ async function validateData(data) {
 }
 app.post('/register', async (req, res) => {
     let data = { vezeteknev, keresznev, email, telefon, jelszo, jelszoismet } = req.body
-    
+
     let exeptions = []
-    exeptions = (await validateData(data))
-    
-    if (exeptions.length ==0){
-        //return res.json({exeptions : 0})
+    exeptions = (await validateRegistrationData(data))
+
+    if (exeptions.length == 0) {
+
         const regJson = fs.readFileSync(REG_FILE, (err, content) => {
             if (err) {
                 return res.status(500).send("Fájlbeolvasási hiba: " + err)
             }
         })
-
         let regObj = JSON.parse(regJson)
-        regObj.push(data)
-
+        userData = {
+            id: regObj.length + 1,
+            vezeteknev: data.vezeteknev,
+            keresznev: data.keresznev,
+            email: data.email,
+            telefon: data.telefon,
+            jelszo: data.jelszo
+        }
+        regObj.push(userData)
         fs.writeFileSync(REG_FILE, JSON.stringify(regObj))
-        
-        return res.json(regObj)
+        req.session.user = {
+            id: userData.id,
+            useremail: userData.email
+        }
+
+        return res.redirect('/')
     }
-    
-    
 
 
 
-    
-
-
-
-
-    /*
-    if (jelszo !== jelszoismet) {
-        hibak.push('A jelszavak nem egyeznek!');
-    } else if (jelszo.length < 8) {
-        hibak.push('A jelszónak legalább 8 karakter hosszúnak kell lennie!');
-    } else if (!/(?=.*[a-z])/.test(jelszo)) {
-        hibak.push('A jelszónak tartalmaznia kell legalább egy kisbetűt!');
-    }*/
-
-    // !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(jelszo || '')
 })
 
-app.post('/login', (req, res) => {
+async function validateLoginData(data, users) {
+    
+    let searchUser;
+    if(/\D/.test(data.username)){
+        searchUser = users.find(u => u.telefon == data.username && u.jelszo==data.password)
+    }
+    else{
+        searchUser = users.find(u => u.email == data.username && u.jelszo==data.password)
+    }
+    return searchUser
+    }
 
-    const { username, password } = req.body
-
+app.post('/login', async (req, res) => {
+    
+    const data = req.body
     const USERS = JSON.parse(fs.readFileSync('reg.json', "utf-8"));
-    if (!username || !password) {
-        alert("Üres valamelyik kötelező mező.")
-    }
-
-    let userCheck;
-
-    if (/\D/.test(username)) { //megnézi hogy szám-e az adott input
-        userCheck = USERS.find(u => u.emailcim === username && u.password === password)
-    }
-    else {
-        userCheck = USERS.find(u => u.telefonszam === username && u.password === password)
-
-
-    }
-    if (!userCheck) {
-        return res.status(401).json({ error: 'Invalid credentials' });
-    }
-    req.session.user = {
-        id: userCheck.id,
-        username: userCheck.email || userCheck.telefonszam
-    }
-    res.redirect('/')
+    let exeptions = []
+    
+   
+    
 })
 
 function isAuthenticated(req, res, next) {
@@ -203,8 +183,8 @@ app.get('/getkosarjson', async (req, res) => {
     try {
         const termekek = await termekekbeolv();
         console.log('Visszaküldött termékek:', termekek);
-        // Megvárja a termékek beolvasását
-        res.json(termekek); // JSON formátumban küldi vissza az adatokat
+
+        res.json(termekek);
     } catch (error) {
         console.error('Hiba a kosár JSON lekérésekor:', error);
         res.status(500).json({ error: 'Hiba történt a kosár adatainak lekérésekor.' });
