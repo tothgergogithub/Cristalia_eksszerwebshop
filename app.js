@@ -78,10 +78,10 @@ async function validateRegistrationData(data) {
         ex.push("A telefonszám hossza nem megfelelő.")
     }
 
-    if (!passwordCheck.test(data.jelszo) ) {
+    if (!passwordCheck.test(data.jelszo)) {
         ex.push("A jelszó nem megfelelő.")
     }
-    if(data.jelszo !== data.jelszoismet){
+    if (data.jelszo !== data.jelszoismet) {
         ex.push("Jelszó nem egyezik")
     }
     return ex
@@ -91,7 +91,7 @@ app.post('/register', async (req, res) => {
 
     let exeptions = []
     exeptions = await validateRegistrationData(data)
-    
+
     if (exeptions.length == 0) {
 
         const regJson = fs.readFileSync(REG_FILE, (err, content) => {
@@ -118,34 +118,52 @@ app.post('/register', async (req, res) => {
         return res.redirect('/')
     }
     else {
-        
+
+        return res.redirect('/regisztracio.html')
     }
 
 
 })
 
 function validateLoginData(data, users) {
-    
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    let ex =[]
     let searchUser;
-    if(/\D/.test(data.username)){
-        searchUser = users.find(u => u.telefon == data.username && u.jelszo==data.password)
+    if (/\D/.test(data.username)) {
+        searchUser = users.find(u => u.telefon==data.username)
     }
-    else{
-        searchUser = users.find(u => u.email == data.username && u.jelszo==data.password)
+    else if (emailRegex.test(data.username)) {
+        searchUser = users.find(u => u.email == data.username)
     }
-    return searchUser
+    else {
+        ex.push("A felhasználónév hibás")
     }
+    
+
+    if(searchUser.jelszo == data.password){
+        ex.push("Nem megfelelő a jelszó")
+       
+    }
+
+    return ex
+}
 
 app.post('/login', async (req, res) => {
-    
-
 
     const data = await req.body
     const USERS = JSON.parse(fs.readFileSync('reg.json', "utf-8"));
-    let exeptions = []
-    
-   
-    
+
+    let exeptions= await validateLoginData(data, USERS)
+
+    if (exeptions == 0){
+
+    }
+
+
+    return res.json(data.password)
+
+
+
 })
 
 function isAuthenticated(req, res, next) {
