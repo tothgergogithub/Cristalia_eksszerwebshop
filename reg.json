@@ -1,1 +1,18 @@
-[{"id":1,"vezeteknev":"asd","keresznev":"asd","email":"asd@gmail.com","telefon":"012012012012","jelszo":"kulasawi"}]
+[
+    {
+        "id": 1,
+        "vezeteknev": "asd",
+        "keresznev": "asd",
+        "email": "asd@gmail.com",
+        "telefon": "012012012012",
+        "jelszo": "kulasawi"
+    },
+    {
+        "id": 2,
+        "vezeteknev": "asd",
+        "keresznev": "asd",
+        "email": "asd@gmail.com",
+        "telefon": "111123123123",
+        "jelszo": "asdASD@123"
+    }
+]
