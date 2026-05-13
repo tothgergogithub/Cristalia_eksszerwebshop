@@ -60,17 +60,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             try { localTermekek = JSON.parse(ls); } catch (e) { localTermekek = []; }
         }
 
-        const response = await fetch('/getkosarjson');
-        let termekek = [];
-        if (response.ok) {
-            try { termekek = await response.json(); } catch { termekek = []; }
-        }
+      
+        localTermekek = (Array.isArray(localTermekek) ? localTermekek : []).map(t => {
+            const parsed = Number(t && t.mennyiseg);
+            const menny = Number.isFinite(parsed) ? Math.max(0, Math.floor(parsed)) : 0;
+            return Object.assign({}, t, { mennyiseg: menny });
+        });
 
+        try { localStorage.setItem('kosar', JSON.stringify(localTermekek)); } catch (_) {}
+        const displayTermekek = localTermekek.map(t => Object.assign({}, t, { mennyiseg: 0 }));
+    
+        let termekek = [];
+        try {
+            const resp = await fetch('/getkosarjson');
+            if (resp.ok) termekek = await resp.json();
+        } catch (e) { termekek = []; }
+
+        
         if (Array.isArray(localTermekek) && localTermekek.length > 0) {
-            termekek = localTermekek;
+       
+            termekek = displayTermekek;
         }
         if (!Array.isArray(termekek)) termekek = [];
-
         if (!id) {
            
             if (termekek.length === 0) {
@@ -82,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.innerHTML = '';
             let totalSum = 0;
             termekek.forEach(item => {
-                const qty = Number(item.mennyiseg) || 1;
+                const qty = Number(item.mennyiseg) || 0;
                 const price = Number(item.ar) || 0;
                 const subtotal = price * qty;
                 totalSum += subtotal;
