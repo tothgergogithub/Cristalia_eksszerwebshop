@@ -4,8 +4,9 @@ const fs = require('fs');
 const { error } = require('console');
 const session = require('express-session');
 const { json } = require('stream/consumers');
-const e = require('express');
+
 const app = express();
+
 
 
 app.use(session({
@@ -115,11 +116,10 @@ app.post('/register', async (req, res) => {
             useremail: userData.email
         }
 
-        return res.redirect('/')
+        return res.json(sucess = true, exeptions)
     }
     else {
-
-        return res.redirect('/regisztracio.html')
+        return res.json(sucess = false, exeptions)
     }
 
 
@@ -127,10 +127,10 @@ app.post('/register', async (req, res) => {
 
 function validateLoginData(data, users) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    let ex =[]
+    let ex = []
     let searchUser;
     if (/\D/.test(data.username)) {
-        searchUser = users.find(u => u.telefon==data.username)
+        searchUser = users.find(u => u.telefon == data.username)
     }
     else if (emailRegex.test(data.username)) {
         searchUser = users.find(u => u.email == data.username)
@@ -138,11 +138,11 @@ function validateLoginData(data, users) {
     else {
         ex.push("A felhasználónév hibás")
     }
-    
 
-    if(searchUser.jelszo == data.password){
+
+    if (searchUser.jelszo == data.password) {
         ex.push("Nem megfelelő a jelszó")
-       
+
     }
 
     return ex
@@ -153,9 +153,9 @@ app.post('/login', async (req, res) => {
     const data = await req.body
     const USERS = JSON.parse(fs.readFileSync('reg.json', "utf-8"));
 
-    let exeptions= await validateLoginData(data, USERS)
+    let exeptions = await validateLoginData(data, USERS)
 
-    if (exeptions == 0){
+    if (exeptions == 0) {
 
     }
 
