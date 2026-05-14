@@ -1,5 +1,3 @@
-
-
 async function getUser() {
 
     try {
@@ -8,12 +6,9 @@ async function getUser() {
 
         const data = await response.json();
 
+        console.log(data);
 
-        const user = data.user;
-
-        console.log('Bejelentkezett felhasználó:', user);
-
-        return user;
+        return data;
 
     } catch (error) {
 
@@ -25,21 +20,26 @@ async function getUser() {
 
 
 
-if (!localStorage.getItem('kosar')) {
-    localStorage.setItem('kosar', JSON.stringify([]));
+if (!sessionStorage.getItem('kosar')) {
+
+    sessionStorage.setItem('kosar', JSON.stringify([]));
 }
+
+
 
 
 
 function kosarba(termek) {
 
-    let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
+    console.log("MEGKAPOTT TERMÉK:", termek);
+
+    let kosar = JSON.parse(sessionStorage.getItem('kosar')) || [];
 
     const letezo = kosar.find(item => item.id === termek.id);
 
     if (letezo) {
 
-        letezo.mennyiseg += 1;
+        letezo.mennyiseg++;
 
     } else {
 
@@ -52,10 +52,13 @@ function kosarba(termek) {
         });
     }
 
-    localStorage.setItem('kosar', JSON.stringify(kosar));
+    sessionStorage.setItem('kosar', JSON.stringify(kosar));
+
+    console.log("KOSÁR:", kosar);
 
     kosarMegjelenites();
 }
+
 
 
 
@@ -66,7 +69,7 @@ function kosarMegjelenites() {
 
     if (!container) return;
 
-    let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
+    let kosar = JSON.parse(sessionStorage.getItem('kosar')) || [];
 
     container.innerHTML = '';
 
@@ -100,8 +103,9 @@ function kosarMegjelenites() {
 
             <p>Mennyiség: ${item.mennyiseg}</p>
 
-            <p>Részösszeg:
-               ${reszosszeg.toLocaleString('hu-HU')} Ft
+            <p>
+                Részösszeg:
+                ${reszosszeg.toLocaleString('hu-HU')} Ft
             </p>
 
             <button onclick="torles(${item.id})">
@@ -116,10 +120,15 @@ function kosarMegjelenites() {
 
     totalDiv.innerHTML = `
         <hr>
+
         <h2>
             Fizetendő:
             ${total.toLocaleString('hu-HU')} Ft
         </h2>
+
+        <button onclick="kosarUrites()">
+            Kosár ürítése
+        </button>
     `;
 
     container.appendChild(totalDiv);
@@ -127,23 +136,26 @@ function kosarMegjelenites() {
 
 
 
+
+
 function torles(id) {
 
-    let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
+    let kosar = JSON.parse(sessionStorage.getItem('kosar')) || [];
 
     kosar = kosar.filter(item => item.id !== id);
 
-    localStorage.setItem('kosar', JSON.stringify(kosar));
+    sessionStorage.setItem('kosar', JSON.stringify(kosar));
 
     kosarMegjelenites();
 }
+
 
 
 
 
 function kosarUrites() {
 
-    localStorage.setItem('kosar', JSON.stringify([]));
+    sessionStorage.setItem('kosar', JSON.stringify([]));
 
     kosarMegjelenites();
 }
@@ -151,12 +163,11 @@ function kosarUrites() {
 
 
 
+
 document.addEventListener('DOMContentLoaded', async () => {
 
-    
     await getUser();
 
-    
     kosarMegjelenites();
 
 });

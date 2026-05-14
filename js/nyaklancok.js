@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ar: parseInt(btn.dataset.ar, 10),
                 mennyiseg: 1
             };
-            let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
+            let kosar = JSON.parse(sessionStorage.getItem('kosar')) || [];
             const letezo = kosar.find(t => t.id == termek.id);
             if (letezo) {
                 letezo.mennyiseg = (Number(letezo.mennyiseg) || 0) + 1;
@@ -48,15 +48,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else {
                 kosar.push(termek);
             }
-           // ...existing code...
-            // mentés localStorage-be
-            localStorage.setItem('kosar', JSON.stringify(kosar));
-            // megakadályozzuk az alapértelmezett viselkedést (ha gomb submit lenne)
+           
+           sessionStorage.setItem('kosar', JSON.stringify(kosar));
+            
             e.preventDefault();
-            // blokkoló értesítés
+            
             alert("A termék a kosárba került!");
-            // átirányítás a kosár oldalra az adott termék id-jával
-// ...existing code...
+            
 
         });
            

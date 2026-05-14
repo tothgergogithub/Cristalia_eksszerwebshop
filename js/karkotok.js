@@ -23,14 +23,41 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <h5 class="card-title">${termek.nev}</h5>
                         <p class="card-text">${termek.leiras}</p>
                         <p class="card-price">${"Ár: " + termek.ar + "Ft"}</p>
-                        <a href="kosar.html" class="btn btn-primary kosarba" data-id="${termek.id}" data-nev="${termek.nev}" data-ar="${termek.ar}">Kosárba</a>
-                    </div>
+                        <button class="btn btn-primary kosarba" data-id="${termek.id}" data-nev="${termek.nev}" data-ar="${termek.ar}">Kosárba</button>
                 </div>
             `;
             container.appendChild(card);
-    }});
-    } 
-    catch (error) {
+        }
+    });
+     container.addEventListener('click', (e) => {
+            const btn = e.target.closest('.kosarba');
+            if (!btn) return;
+            const termek = {
+                id: String(btn.dataset.id),
+                nev: btn.dataset.nev,
+                ar: parseInt(btn.dataset.ar, 10),
+                mennyiseg: 1
+            };
+            let kosar = JSON.parse(sessionStorage.getItem('kosar')) || [];
+            const letezo = kosar.find(t => t.id == termek.id);
+            if (letezo) {
+                letezo.mennyiseg = (Number(letezo.mennyiseg) || 0) + 1;
+             
+            } else {
+                kosar.push(termek);
+            }
+           
+           sessionStorage.setItem('kosar', JSON.stringify(kosar));
+            
+            e.preventDefault();
+            
+            alert("A termék a kosárba került!");
+            
+
+        });
+           
+
+    } catch (error) {
         console.error("Hiba történt:", error);
     }
 });

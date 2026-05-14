@@ -28,9 +28,37 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
             `;
             container.appendChild(card);
-    }});
-    } 
-    catch (error) {
+        }
+    });
+     container.addEventListener('click', (e) => {
+            const btn = e.target.closest('.kosarba');
+            if (!btn) return;
+            const termek = {
+                id: String(btn.dataset.id),
+                nev: btn.dataset.nev,
+                ar: parseInt(btn.dataset.ar, 10),
+                mennyiseg: 1
+            };
+            let kosar = JSON.parse(sessionStorage.getItem('kosar')) || [];
+            const letezo = kosar.find(t => t.id == termek.id);
+            if (letezo) {
+                letezo.mennyiseg = (Number(letezo.mennyiseg) || 0) + 1;
+             
+            } else {
+                kosar.push(termek);
+            }
+           
+           sessionStorage.setItem('kosar', JSON.stringify(kosar));
+            
+            e.preventDefault();
+            
+            alert("A termék a kosárba került!");
+            
+
+        });
+           
+
+    } catch (error) {
         console.error("Hiba történt:", error);
     }
 });
