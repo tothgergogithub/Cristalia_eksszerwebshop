@@ -218,3 +218,4 @@ app.get('/getkosarjson', async (req, res) => {
 app.listen(3000, () => {
     console.log('http://localhost:3000');
 })
+

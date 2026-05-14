@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             // blokkoló értesítés
             alert("A termék a kosárba került!");
             // átirányítás a kosár oldalra az adott termék id-jával
-            window.location.href = `/kosar.html?id=${encodeURIComponent(termek.id)}`;
 // ...existing code...
 
         });

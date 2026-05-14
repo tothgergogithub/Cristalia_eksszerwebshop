@@ -1,151 +1,162 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const container = document.getElementById('kosar-lista');
-    if (!container) {
-        console.error('Nincs #kosar-lista elem a kosar.html-ben.');
-        return;
-    }
-    
 
-    function setFizetendo(total) {
-        const formatted = Number(total).toLocaleString('hu-HU');
-      
-        const osszegEl = document.getElementById('osszeg');
-        const penznemEl = document.getElementById('penznem');
-        if (osszegEl) {
-            osszegEl.textContent = formatted;
-            if (penznemEl) penznemEl.textContent = penznemEl.textContent || 'HUF';
-            return;
-        }
 
-        
-        let bubble = document.getElementById('fizetendo-bubble');
-        if (bubble) {
-            const text = `Fizetendő: ${formatted} Ft`;
-            if (bubble.tagName === 'INPUT' || bubble.tagName === 'TEXTAREA') bubble.value = text;
-            else bubble.textContent = text;
-            bubble.style.display = '';
-            return;
-        }
-
-        
-        bubble = document.querySelector('.fizetendo-bubble, .white-bubble, [data-role="fizetendo"]');
-        if (bubble) {
-            const text = `Fizetendő: ${formatted} Ft`;
-            if (bubble.tagName === 'INPUT' || bubble.tagName === 'TEXTAREA') bubble.value = text;
-            else bubble.textContent = text;
-            bubble.style.display = '';
-            return;
-        }
-
-        const newBubble = document.createElement('div');
-        newBubble.id = 'fizetendo-bubble';
-        newBubble.className = 'fizetendo-bubble white-bubble';
-        newBubble.style.cssText =
-            'display:flex;align-items:center;justify-content:space-between;background:#fff;color:#000;padding:10px 18px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,0.12);min-width:260px;max-width:760px;margin:12px auto;';
-        newBubble.textContent = `Fizetendő: ${formatted} Ft`;
-
-        if (container && container.parentNode) container.parentNode.insertBefore(newBubble, container);
-        else document.body.appendChild(newBubble);
-    }
-
+async function getUser() {
 
     try {
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
 
-        
-        const ls = localStorage.getItem('kosar');
-        let localTermekek = [];
-        if (ls) {
-            try { localTermekek = JSON.parse(ls); } catch (e) { localTermekek = []; }
-        }
+        const response = await fetch('/me');
 
-      
-        localTermekek = (Array.isArray(localTermekek) ? localTermekek : []).map(t => {
-            const parsed = Number(t && t.mennyiseg);
-            const menny = Number.isFinite(parsed) ? Math.max(0, Math.floor(parsed)) : 0;
-            return Object.assign({}, t, { mennyiseg: menny });
-        });
+        const data = await response.json();
 
-        try { localStorage.setItem('kosar', JSON.stringify(localTermekek)); } catch (_) {}
-        const displayTermekek = localTermekek.map(t => Object.assign({}, t, { mennyiseg: 0 }));
-    
-        let termekek = [];
-        try {
-            const resp = await fetch('/getkosarjson');
-            if (resp.ok) termekek = await resp.json();
-        } catch (e) { termekek = []; }
 
-        
-        if (Array.isArray(localTermekek) && localTermekek.length > 0) {
-       
-            termekek = displayTermekek;
-        }
-        if (!Array.isArray(termekek)) termekek = [];
-        if (!id) {
-           
-            if (termekek.length === 0) {
-                container.innerHTML = '<p>A kosár üres.</p>';
-                setFizetendo(0);
-                return;
-            }
+        const user = data.user;
 
-            container.innerHTML = '';
-            let totalSum = 0;
-            termekek.forEach(item => {
-                const qty = Number(item.mennyiseg) || 0;
-                const price = Number(item.ar) || 0;
-                const subtotal = price * qty;
-                totalSum += subtotal;
+        console.log('Bejelentkezett felhasználó:', user);
 
-                const el = document.createElement('div');
-                el.className = 'kosar-item';
-                el.innerHTML = `
-                    ${item.kep ? `<img src="${item.kep}" alt="${item.nev}" style="max-width:80px;">` : ''}
-                    <strong>${item.nev || 'Név hiányzik'}</strong><br/>
-                    Egységár: ${price.toLocaleString('hu-HU')} Ft — Darab: ${qty} — Részösszeg: ${subtotal.toLocaleString('hu-HU')} Ft
-                `;
-                container.appendChild(el);
-            });
-
-            setFizetendo(totalSum);
-            const totalEl = document.createElement('div');
-            totalEl.className = 'kosar-total';
-            totalEl.style.marginTop = '12px';
-            totalEl.innerHTML = `<hr/><h4>Fizetendő összeg: ${totalSum.toLocaleString('hu-HU')} Ft</h4>`;
-            container.appendChild(totalEl);
-            return;
-        }
-
-        
-        const item = termekek.find(t => String(t.id) === String(id));
-        if (!item) {
-            container.innerHTML = '<p>Nem található a kiválasztott termék a kosárban.</p>';
-            setFizetendo(0);
-            return;
-        }
-
-        const qty = Number(item.mennyiseg) || 1;
-        const price = Number(item.ar) || 0;
-        const subtotal = price * qty;
-
-        container.innerHTML = `
-            <div class="termek-detail">
-                ${item.kep ? `<img src="${item.kep}" alt="${item.nev}" style="max-width:150px;">` : ''}
-                <h2>${item.nev || 'Név hiányzik'}</h2>
-                <p>${item.leiras || ''}</p>
-                <p>Egységár: ${price.toLocaleString('hu-HU')} Ft</p>
-                <p>Mennyiség: ${qty}</p>
-                <p>Részösszeg: ${subtotal.toLocaleString('hu-HU')} Ft</p>
-                <hr/>
-               
-            </div>
-        `;
-        setFizetendo(subtotal);
+        return user;
 
     } catch (error) {
-        console.error('Hiba a kosár betöltésekor:', error);
-        container.innerHTML = `<p>Hiba: ${error.message}</p>`;
-        setFizetendo(0);
+
+        console.error('Hiba a /me lekérésnél:', error);
+
+        return null;
     }
+}
+
+
+
+if (!localStorage.getItem('kosar')) {
+    localStorage.setItem('kosar', JSON.stringify([]));
+}
+
+
+
+function kosarba(termek) {
+
+    let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
+
+    const letezo = kosar.find(item => item.id === termek.id);
+
+    if (letezo) {
+
+        letezo.mennyiseg += 1;
+
+    } else {
+
+        kosar.push({
+            id: termek.id,
+            nev: termek.nev,
+            ar: termek.ar,
+            kep: termek.kep || '',
+            mennyiseg: 1
+        });
+    }
+
+    localStorage.setItem('kosar', JSON.stringify(kosar));
+
+    kosarMegjelenites();
+}
+
+
+
+
+function kosarMegjelenites() {
+
+    const container = document.getElementById('kosar-lista');
+
+    if (!container) return;
+
+    let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
+
+    container.innerHTML = '';
+
+    if (kosar.length === 0) {
+
+        container.innerHTML = '<p>A kosár üres.</p>';
+
+        return;
+    }
+
+    let total = 0;
+
+    kosar.forEach(item => {
+
+        const reszosszeg = item.ar * item.mennyiseg;
+
+        total += reszosszeg;
+
+        const div = document.createElement('div');
+
+        div.className = 'kosar-item';
+
+        div.innerHTML = `
+            <hr>
+
+            ${item.kep ? `<img src="${item.kep}" width="80">` : ''}
+
+            <h3>${item.nev}</h3>
+
+            <p>Ár: ${item.ar.toLocaleString('hu-HU')} Ft</p>
+
+            <p>Mennyiség: ${item.mennyiseg}</p>
+
+            <p>Részösszeg:
+               ${reszosszeg.toLocaleString('hu-HU')} Ft
+            </p>
+
+            <button onclick="torles(${item.id})">
+                Törlés
+            </button>
+        `;
+
+        container.appendChild(div);
+    });
+
+    const totalDiv = document.createElement('div');
+
+    totalDiv.innerHTML = `
+        <hr>
+        <h2>
+            Fizetendő:
+            ${total.toLocaleString('hu-HU')} Ft
+        </h2>
+    `;
+
+    container.appendChild(totalDiv);
+}
+
+
+
+function torles(id) {
+
+    let kosar = JSON.parse(localStorage.getItem('kosar')) || [];
+
+    kosar = kosar.filter(item => item.id !== id);
+
+    localStorage.setItem('kosar', JSON.stringify(kosar));
+
+    kosarMegjelenites();
+}
+
+
+
+
+function kosarUrites() {
+
+    localStorage.setItem('kosar', JSON.stringify([]));
+
+    kosarMegjelenites();
+}
+
+
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    
+    await getUser();
+
+    
+    kosarMegjelenites();
+
 });

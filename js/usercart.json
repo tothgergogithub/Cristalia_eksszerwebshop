@@ -1,0 +1,11 @@
+[
+    {
+        "userID":1,
+        "termeke" :[
+            {
+                "termekID":1,
+                "mennyiseg":2
+            }
+        ]
+    }
+]
