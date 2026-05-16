@@ -102,15 +102,9 @@ function kosarMegjelenites() {
             <p>Ár: ${item.ar.toLocaleString('hu-HU')} Ft</p>
 
             <p>Mennyiség: ${item.mennyiseg}</p>
+            <p>Részösszeg: ${reszosszeg.toLocaleString('hu-HU')} Ft</p>
 
-            <p>
-                Részösszeg:
-                ${reszosszeg.toLocaleString('hu-HU')} Ft
-            </p>
-
-            <button onclick="torles(${item.id})">
-                Törlés
-            </button>
+            <button onclick="torles(${item.id})">Törlés</button>
         `;
 
         container.appendChild(div);
@@ -120,15 +114,10 @@ function kosarMegjelenites() {
 
     totalDiv.innerHTML = `
         <hr>
+        <h2>Fizetendő: ${total.toLocaleString('hu-HU')} Ft</h2>
 
-        <h2>
-            Fizetendő:
-            ${total.toLocaleString('hu-HU')} Ft
-        </h2>
-
-        <button onclick="kosarUrites()">
-            Kosár ürítése
-        </button>
+        <button onclick="kosarUrites()">Kosár ürítése</button>
+        <button onclick="fizetes()">Fizetés</button>
     `;
 
     container.appendChild(totalDiv);
@@ -142,7 +131,14 @@ function torles(id) {
 
     let kosar = JSON.parse(sessionStorage.getItem('kosar')) || [];
 
-    kosar = kosar.filter(item => item.id !== id);
+    const index = kosar.findIndex(item => item.id == id);
+    if (index === -1) return;
+
+    if (kosar[index].mennyiseg > 1) {
+        kosar[index].mennyiseg--;
+    } else {
+        kosar.splice(index, 1);
+    }
 
     sessionStorage.setItem('kosar', JSON.stringify(kosar));
 
@@ -154,6 +150,20 @@ function torles(id) {
 
 
 function kosarUrites() {
+    sessionStorage.setItem('kosar', JSON.stringify([]));
+    kosarMegjelenites();
+}
+
+
+function fizetes() {
+    let kosar = JSON.parse(sessionStorage.getItem('kosar')) || [];
+
+    if (kosar.length === 0) {
+        alert("Nincs termék a kosárban, nem tudsz fizetni!");
+        return;
+    }
+
+    alert("Sikeres fizetés!");
 
     sessionStorage.setItem('kosar', JSON.stringify([]));
 
