@@ -73,12 +73,21 @@ function kosarMegjelenites() {
 
     container.innerHTML = '';
 
-    if (kosar.length === 0) {
+if (kosar.length === 0) {
 
-        container.innerHTML = '<p>A kosár üres.</p>';
+    container.innerHTML =
+        '<p class="text-white">A kosár üres.</p>';
 
-        return;
+    const osszegElem =
+        document.getElementById('osszeg');
+
+    if (osszegElem) {
+
+        osszegElem.textContent = '0';
     }
+
+    return;
+}
 
     let total = 0;
 
@@ -95,8 +104,8 @@ function kosarMegjelenites() {
         div.innerHTML = `
             <hr>
 
-            ${item.kep ? `<img src="${item.kep}" width="80">` : ''}
-
+            
+            <div class="text-white my-3 p-3">
             <h3>${item.nev}</h3>
 
             <p>Ár: ${item.ar.toLocaleString('hu-HU')} Ft</p>
@@ -105,23 +114,23 @@ function kosarMegjelenites() {
             <p>Részösszeg: ${reszosszeg.toLocaleString('hu-HU')} Ft</p>
 
             <button onclick="torles(${item.id})">Törlés</button>
+            </div>
         `;
 
         container.appendChild(div);
+        
     });
+    const osszegElem =
+        document.getElementById('osszeg');
 
-    const totalDiv = document.createElement('div');
+    if (osszegElem) {
 
-    totalDiv.innerHTML = `
-        <hr>
-        <h2>Fizetendő: ${total.toLocaleString('hu-HU')} Ft</h2>
-
-        <button onclick="kosarUrites()">Kosár ürítése</button>
-        <button onclick="fizetes()">Fizetés</button>
-    `;
-
-    container.appendChild(totalDiv);
+        osszegElem.textContent =
+            total.toLocaleString('hu-HU')
+    }
 }
+
+
 
 
 
