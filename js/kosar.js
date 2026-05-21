@@ -128,6 +128,15 @@ if (kosar.length === 0) {
         osszegElem.textContent =
             total.toLocaleString('hu-HU')
     }
+    const uritesGomb = document.createElement('button');
+
+    uritesGomb.textContent = 'Kosár ürítése';
+
+    uritesGomb.className = 'btn btn-danger mt-3';
+
+    uritesGomb.onclick = kosarUrites;
+
+    container.appendChild(uritesGomb);
 }
 
 
