@@ -92,16 +92,13 @@ app.post('/register', async (req, res) => {
 
     let exeptions = []
     exeptions = await validateRegistrationData(data)
+    console.log(exeptions)
 
     if (exeptions.length == 0) {
 
-        const regJson = fs.readFileSync(REG_FILE, (err, content) => {
-            if (err) {
-                return res.status(500).send("Fájlbeolvasási hiba: " + err)
-            }
-        })
+        const regJson = fs.readFileSync(REG_FILE)
         let regObj = JSON.parse(regJson)
-        userData = {
+        let userData = {
             id: regObj.length + 1,
             vezeteknev: data.vezeteknev,
             keresznev: data.keresznev,
@@ -116,10 +113,10 @@ app.post('/register', async (req, res) => {
             useremail: userData.email
         }
 
-        return res.json(sucess = true, exeptions)
+        return res.status(201).json({message: "Sikeres regisztráció!"})
     }
     else {
-        return res.json(sucess = false, exeptions)
+        return res.status(400).json({exeptions})
     }
 
 

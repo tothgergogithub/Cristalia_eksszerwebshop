@@ -1,21 +1,20 @@
-
-
+const { response } = require("express")
 
 function redRegisterFields() {
     fields = {
-        vezeteknev: document.getElementsByName("vezeteknev"),
-        keresztnev: document.getElementsByName("keresznev"),
-        email: document.getElementsByName("email"),
-        telefon: document.getElementsByName("telefon"),
-        jelszo: document.getElementsByName("jelszo"),
-        jelszoismet: document.getElementsByName("jelszoismet")
+        vezeteknev: document.getElementById("vezeteknev").value,
+        keresztnev: document.getElementById("keresznev").value,
+        email: document.getElementById("email").value,
+        telefon: document.getElementById("telefon").value,
+        jelszo: document.getElementById("jelszo").value,
+        jelszoismet: document.getElementById("jelszoismet").value
     }
     return fields
 }
     
-document.addEventListener("submit", async ()=>{
-        preventDefault()
-        const data = redRegisterFields()
+document.addEventListener("submit", async (event)=>{
+        event.preventDefault()
+        const data = await redRegisterFields()
 
         const response = await fetch('/register', {
             method:"POST",
@@ -25,11 +24,14 @@ document.addEventListener("submit", async ()=>{
             body : JSON.stringify(data)
         })
 
+        await verifyRegistration(response)
 
-        if(response.sucess == true){
-            alert("Sikeres regisztráció", response.parse())
-        }
-        else{
-            alert("Nah",response.parse())
-        }
 })
+
+function verifyRegistration(response) {
+    return response.json().then(errorData =>{
+        const err = new Error("Validációs hiba")
+        err.data = errorData
+        throw err
+    }).catch()
+}

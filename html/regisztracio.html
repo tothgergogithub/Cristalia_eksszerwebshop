@@ -109,38 +109,38 @@
     <div class="container d-flex justify-content-center align-items-center flex-grow-1">
       <div class="login-card" >
 
-        <form autocomplete="off" >
+        <form method="post" autocomplete="off" >
           <h5>Regisztráció:</h5>
 
           <div class="mb-3">
             <label class="form-label">Vezetéknév</label>
-            <input type="text" class="form-control" name="vezeteknev" required>
+            <input type="text" class="form-control" id="vezeteknev" required>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Keresztnév</label>
-            <input type="text" class="form-control" name="keresznev" required>
+            <input type="text" class="form-control" id="keresznev" required>
 
           </div>
           <div class="mb-3 helper-lable-group">
             <label class="form-label">Email-cím</label>
             <label for="Email-cím" class="helper-label">...@gmail.com, freemail.com, hotmail.com, outlook.com</label>
-            <input type="text" class="form-control" name="email" required >
+            <input type="text" class="form-control" id="email" required >
           </div>
           <div class="mb-3 helper-lable-group">
             <label class="form-label">Telefonszám</label>
             <label for="telefonszam-help" class="helper-label">Csak számok a 0-9-ig tejedő tertományban és 11-től 13-ig terjedő
               darabszámban</label>
-            <input type="text" class="form-control" name="telefon" required >
+            <input type="text" class="form-control" id="telefon" required >
           </div>
           <div class="mb-3 helper-lable-group">
             <label class="form-label">Jelszó</label>
             <label for="passwor-help" class="helper-label">A jelszónak legalább 8 karakternek kell lennie, tartalmaznia kell számot 0-9-ig és tartalmaznia kell egy speciális karaktert.</label>
-            <input type="password" class="form-control" name="jelszo" required autocomplete="new-password" >
+            <input type="password" class="form-control" id="jelszo" required autocomplete="new-password" >
           </div>
           <div class="mb-3 ">
             <label class="form-label">Jelszó ismét</label >
-            <input type="password" class="form-control" name="jelszoismet" required>
+            <input type="password" class="form-control" id="jelszoismet" required>
           </div>
 
 
