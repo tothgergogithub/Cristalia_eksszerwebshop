@@ -1,0 +1,9 @@
+hibakódok:
+
+1: a jelszó nem megfelelő
+2: a jelszó és a jelszó ismét nem egyezik
+3: az email nem megfelelő
+4:  a telefonszám hossza nem megfelelő
+5: a telefonszám csak számokat tartalmazhat
+6: a vezetéknév túl hosszú
+7: a keresztnév túl hosszú

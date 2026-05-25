@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'stilesheets')));
 app.use(express.static(path.join(__dirname, 'img')));
 app.use(express.static(path.join(__dirname, 'js')));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 
 const REG_FILE = path.join(__dirname, 'reg.json');
 const KOSAR_FILE = path.join(__dirname, 'kosar.json');
@@ -60,63 +61,85 @@ const KOSAR_FILE = path.join(__dirname, 'kosar.json');
     });
 }
 
-async function validateRegistrationData(data) {
+function validateRegistrationData(data) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const passwordCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
     let ex = []
 
+    let exeptionCodes = {
+        invalidPassword:1,
+        passwordsDontMatch:2,
+        invalidEmail:3,
+        invalidPhoneLength:4,
+        onlyNumbersInPhone:5,
+        lastnameToLong:6,
+        firstNameToLong:7
+    }
+
+    if(data.vezeteknev.length >20){
+        ex.push(exeptionCodes.lastnameToLong)
+    }
+    if(data.keresznev.length >20){
+        ex.push(exeptionCodes.firstNameToLong)
+    }
 
     if (!emailRegex.test(data.email)) {
-        ex.push("Az email nem megfelelő")
+        ex.push(exeptionCodes.invalidEmail)
     }
 
     if (!/^\d+$/.test(data.telefon)) {
-        ex.push("A telefonszám csak szám lehet")
+        ex.push(exeptionCodes.onlyNumbersInPhone)
 
 
     }
     if (data.telefon.length < 11 || data.telefon.length > 13) {
-        ex.push("A telefonszám hossza nem megfelelő.")
+        ex.push(exeptionCodes.invalidPhoneLength)
     }
 
     if (!passwordCheck.test(data.jelszo)) {
-        ex.push("A jelszó nem megfelelő.")
+        ex.push(exeptionCodes.invalidPassword)
     }
     if (data.jelszo !== data.jelszoismet) {
-        ex.push("Jelszó nem egyezik")
+        ex.push(exeptionCodes.passwordsDontMatch)
     }
     return ex
 }
-app.post('/register', async (req, res) => {
+app.post('/register', (req, res) => {
+    console.log("req.body: ", req.body)
     let data = req.body
 
     let exeptions = []
-    exeptions = await validateRegistrationData(data)
+    exeptions = validateRegistrationData(data)
     console.log(exeptions)
 
     if (exeptions.length == 0) {
-
-        const regJson = fs.readFileSync(REG_FILE)
-        let regObj = JSON.parse(regJson)
-        let userData = {
-            id: regObj.length + 1,
-            vezeteknev: data.vezeteknev,
-            keresznev: data.keresznev,
-            email: data.email,
-            telefon: data.telefon,
-            jelszo: data.jelszo
+        try {
+            const regJson = fs.readFileSync(REG_FILE)
+            let regObj = JSON.parse(regJson)
+            let userData = {
+                id: regObj.length + 1,
+                vezeteknev: data.vezeteknev,
+                keresznev: data.keresznev,
+                email: data.email,
+                telefon: data.telefon,
+                jelszo: data.jelszo
+            }
+            regObj.push(userData)
+            fs.writeFileSync(REG_FILE, JSON.stringify(regObj))
+            req.session.user = {
+                id: userData.id,
+                useremail: userData.email
+            }
+            return res.status(201).json({ message: "Sikeres regisztráció!" })
+        } catch (e) {
+            console.log("Ez nem stimmel: " + e)
+            return res.status(500).json({message: "Sajnos a szerver nem érzi jól magát."})
         }
-        regObj.push(userData)
-        fs.writeFileSync(REG_FILE, JSON.stringify(regObj))
-        req.session.user = {
-            id: userData.id,
-            useremail: userData.email
-        }
 
-        return res.status(201).json({message: "Sikeres regisztráció!"})
+
     }
     else {
-        return res.status(400).json({exeptions})
+        return res.status(400).json({ exeptions })
     }
 
 
