@@ -4,6 +4,7 @@ const fs = require('fs');
 const { error } = require('console');
 const session = require('express-session');
 const { json } = require('stream/consumers');
+const e = require('express');
 
 const app = express();
 
@@ -65,21 +66,22 @@ function validateRegistrationData(data) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const passwordCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
     let ex = []
+    console.log("passed data: " + data.vezeteknev)
 
     let exeptionCodes = {
-        invalidPassword:1,
-        passwordsDontMatch:2,
-        invalidEmail:3,
-        invalidPhoneLength:4,
-        onlyNumbersInPhone:5,
-        lastnameToLong:6,
-        firstNameToLong:7
+        invalidPassword: 1,
+        passwordsDontMatch: 2,
+        invalidEmail: 3,
+        invalidPhoneLength: 4,
+        onlyNumbersInPhone: 5,
+        lastnameToLong: 6,
+        firstNameToLong: 7
     }
 
-    if(data.vezeteknev.length >20){
+    if (data.vezeteknev.length > 20) {
         ex.push(exeptionCodes.lastnameToLong)
     }
-    if(data.keresznev.length >20){
+    if (data.keresztnev.length > 20) {
         ex.push(exeptionCodes.firstNameToLong)
     }
 
@@ -105,12 +107,9 @@ function validateRegistrationData(data) {
     return ex
 }
 app.post('/register', (req, res) => {
-    console.log("req.body: ", req.body)
     let data = req.body
-
     let exeptions = []
     exeptions = validateRegistrationData(data)
-    console.log(exeptions)
 
     if (exeptions.length == 0) {
         try {
@@ -119,7 +118,7 @@ app.post('/register', (req, res) => {
             let userData = {
                 id: regObj.length + 1,
                 vezeteknev: data.vezeteknev,
-                keresznev: data.keresznev,
+                keresztnev: data.keresznev,
                 email: data.email,
                 telefon: data.telefon,
                 jelszo: data.jelszo
@@ -133,7 +132,7 @@ app.post('/register', (req, res) => {
             return res.status(201).json({ message: "Sikeres regisztráció!" })
         } catch (e) {
             console.log("Ez nem stimmel: " + e)
-            return res.status(500).json({message: "Sajnos a szerver nem érzi jól magát."})
+            return res.status(500).json({ message: "Sajnos a szerver nem érzi jól magát." })
         }
 
 
@@ -148,39 +147,62 @@ app.post('/register', (req, res) => {
 function validateLoginData(data, users) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     let ex = []
-    let searchUser;
-    if (/\D/.test(data.username)) {
-        searchUser = users.find(u => u.telefon == data.username)
+    let loginErrorCodes = {
+        userNotFound: 8,
+        invalidPassword:9
     }
-    else if (emailRegex.test(data.username)) {
-        searchUser = users.find(u => u.email == data.username)
+    let searchUser = users.find(u => u.email === data.username)
+    if(!searchUser){
+        ex.push(loginErrorCodes.userNotFound)
     }
-    else {
-        ex.push("A felhasználónév hibás")
+    else{
+        if(searchUser.jelszo !== data.password){
+            ex.push(loginErrorCodes.invalidPassword)
+        }
     }
-
-
-    if (searchUser.jelszo == data.password) {
-        ex.push("Nem megfelelő a jelszó")
-
-    }
-
+    
     return ex
 }
 
-app.post('/login', async (req, res) => {
 
-    const data = await req.body
-    const USERS = JSON.parse(fs.readFileSync('reg.json', "utf-8"));
+function getUserId(data, users) {
+    let searchUser = users.find(u => u.email === data.username)
+    return searchUser.id
+}
+function getUserId(data, users) {
+    let searchUser = users.find(u => u.email === data.username)
+    return searchUser.email
+}
 
-    let exeptions = await validateLoginData(data, USERS)
+app.post('/login', (req, res) => {
 
-    if (exeptions == 0) {
-
+    const data = req.body
+    let regJson;
+    try {
+        regJson = fs.readFileSync(REG_FILE)
+        
+    } catch (e) {
+        return res.status(500).json({ message: "Sikertelen fájlbeolvasás", e })
     }
+    const userObject = JSON.parse(regJson)
+    let exeptions = []
+    exeptions = validateLoginData(data, userObject)
 
+    if (exeptions.length == 0) {
+        try {
+            req.session.user = {
+                id: getUserId(data, userObject),
+                useremail: getUserEmail(data, userObject)
+            }
+            return res.status(200).json({ message: "Sikeres bejelentkezés" })
 
-    return res.json(data.password)
+        } catch (e) {
+            return res.status(500).json({ message: "A szerver nem érzi jól magát", e })
+        }
+    }
+    else {
+        return res.status(400).json({ exeptions })
+    }
 
 
 

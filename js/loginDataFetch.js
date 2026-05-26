@@ -2,12 +2,8 @@
 
 function redRegisterFields() {
     return {
-        vezeteknev: document.getElementById("vezeteknev").value,
-        keresztnev: document.getElementById("keresznev").value,
-        email: document.getElementById("email").value,
-        telefon: document.getElementById("telefon").value,
-        jelszo: document.getElementById("jelszo").value,
-        jelszoismet: document.getElementById("jelszoismet").value
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value,
     }
     
 }
@@ -16,7 +12,7 @@ document.addEventListener("submit", e=>{
         e.preventDefault()
         const fields =  redRegisterFields()
 
-        fetch('/register', {
+        fetch('/login', {
             method:"POST",
             headers: {
                 "Content-Type": "application/json"
@@ -37,8 +33,8 @@ document.addEventListener("submit", e=>{
                 }
             }
         ).then(() =>{
-            console.log("A regisztráció sikeres volt!")
-            alert("A regisztráció sikeres volt.")
+            console.log("A bejelentkezés sikeres volt!")
+            alert("A bejelentkezés sikeres volt.")
             location.replace('/')}
         ).catch(
             cougthError =>{
