@@ -7,3 +7,6 @@ hibakódok:
 5: a telefonszám csak számokat tartalmazhat
 6: a vezetéknév túl hosszú
 7: a keresztnév túl hosszú
+8: bejelentkezés: a felhasználó nem található
+9: bejelentkezés: a jelszó nem megfelelő
+10: a felhasználó már létezik

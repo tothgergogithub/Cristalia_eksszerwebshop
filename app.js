@@ -62,7 +62,7 @@ const KOSAR_FILE = path.join(__dirname, 'kosar.json');
     });
 }
 
-function validateRegistrationData(data) {
+function validateRegistrationData(userInput, regData) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const passwordCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
     let ex = []
@@ -75,46 +75,60 @@ function validateRegistrationData(data) {
         invalidPhoneLength: 4,
         onlyNumbersInPhone: 5,
         lastnameToLong: 6,
-        firstNameToLong: 7
+        firstNameToLong: 7,
+        userAlredyExists:10
     }
-
-    if (data.vezeteknev.length > 20) {
-        ex.push(exeptionCodes.lastnameToLong)
+    let currentRegistrationExistanceCheck = regData.find(user => user.email == userInput.email)
+    if (!currentRegistrationExistanceCheck){
+        if (data.vezeteknev.length > 20) {
+            ex.push(exeptionCodes.lastnameToLong)
+        }
+        if (data.keresztnev.length > 20) {
+            ex.push(exeptionCodes.firstNameToLong)
+        }
+    
+        if (!emailRegex.test(data.email)) {
+            ex.push(exeptionCodes.invalidEmail)
+        }
+    
+        if (!/^\d+$/.test(data.telefon)) {
+            ex.push(exeptionCodes.onlyNumbersInPhone)
+    
+    
+        }
+        if (data.telefon.length < 11 || data.telefon.length > 13) {
+            ex.push(exeptionCodes.invalidPhoneLength)
+        }
+    
+        if (!passwordCheck.test(data.jelszo)) {
+            ex.push(exeptionCodes.invalidPassword)
+        }
+        if (data.jelszo !== data.jelszoismet) {
+            ex.push(exeptionCodes.passwordsDontMatch)
+        }
     }
-    if (data.keresztnev.length > 20) {
-        ex.push(exeptionCodes.firstNameToLong)
-    }
-
-    if (!emailRegex.test(data.email)) {
-        ex.push(exeptionCodes.invalidEmail)
-    }
-
-    if (!/^\d+$/.test(data.telefon)) {
-        ex.push(exeptionCodes.onlyNumbersInPhone)
-
-
-    }
-    if (data.telefon.length < 11 || data.telefon.length > 13) {
-        ex.push(exeptionCodes.invalidPhoneLength)
-    }
-
-    if (!passwordCheck.test(data.jelszo)) {
-        ex.push(exeptionCodes.invalidPassword)
-    }
-    if (data.jelszo !== data.jelszoismet) {
-        ex.push(exeptionCodes.passwordsDontMatch)
+    else {
+        ex.push(exeptionCodes.userAlredyExists)
     }
     return ex
 }
 app.post('/register', (req, res) => {
     let data = req.body
     let exeptions = []
-    exeptions = validateRegistrationData(data)
+    let regJson
+    let regObj
+    try {
+        regJson = fs.readFileSync(REG_FILE)
+        regObj = JSON.parse(regJson)
+        exeptions = validateRegistrationData(data, regObj)
+        
+    } catch (serverEx) {
+        return res.status(500).json({message:"A szerveren hiba történt a regisztrációs fájl elérésével vagy az adat validációval", exeptions:serverEx})
+    }
 
     if (exeptions.length == 0) {
         try {
-            const regJson = fs.readFileSync(REG_FILE)
-            let regObj = JSON.parse(regJson)
+            
             let userData = {
                 id: regObj.length + 1,
                 vezeteknev: data.vezeteknev,
@@ -130,9 +144,9 @@ app.post('/register', (req, res) => {
                 useremail: userData.email
             }
             return res.status(201).json({ message: "Sikeres regisztráció!" })
-        } catch (e) {
-            console.log("Ez nem stimmel: " + e)
-            return res.status(500).json({ message: "Sajnos a szerver nem érzi jól magát." })
+        } catch (exeptions) {
+            console.log("Ez nem stimmel: " + exeptions)
+            return res.status(500).json({ message: "Sajnos a szerver nem érzi jól magát.", exeptions:serverEx })
         }
 
 
@@ -145,12 +159,12 @@ app.post('/register', (req, res) => {
 })
 
 function validateLoginData(data, users) {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     let ex = []
     let loginErrorCodes = {
         userNotFound: 8,
         invalidPassword:9
     }
+    
     let searchUser = users.find(u => u.email === data.username)
     if(!searchUser){
         ex.push(loginErrorCodes.userNotFound)
@@ -160,7 +174,7 @@ function validateLoginData(data, users) {
             ex.push(loginErrorCodes.invalidPassword)
         }
     }
-    
+    console.log("afete check" + ex)
     return ex
 }
 
@@ -169,8 +183,9 @@ function getUserId(data, users) {
     let searchUser = users.find(u => u.email === data.username)
     return searchUser.id
 }
-function getUserId(data, users) {
+function getUserEmail(data, users) {
     let searchUser = users.find(u => u.email === data.username)
+    console.log("get user email" + searchUser.email)
     return searchUser.email
 }
 
@@ -180,16 +195,19 @@ app.post('/login', (req, res) => {
     let regJson;
     try {
         regJson = fs.readFileSync(REG_FILE)
-        
+        console.log("sucsessful filered")
     } catch (e) {
         return res.status(500).json({ message: "Sikertelen fájlbeolvasás", e })
     }
     const userObject = JSON.parse(regJson)
     let exeptions = []
+    console.log("before the exeptioncheck")
     exeptions = validateLoginData(data, userObject)
+    console.log("after the exeptioncheck")
 
     if (exeptions.length == 0) {
         try {
+            console.log("before session")
             req.session.user = {
                 id: getUserId(data, userObject),
                 useremail: getUserEmail(data, userObject)
@@ -207,14 +225,6 @@ app.post('/login', (req, res) => {
 
 
 })
-
-function isAuthenticated(req, res, next) {
-    if (req.session.user) {
-        next();
-    } else {
-        res.redirect('/login');
-    }
-}
 app.get('/me', (req, res) => {
     if (req.session.user) {
         res.json({ loggedIn: true, user: req.session.user });

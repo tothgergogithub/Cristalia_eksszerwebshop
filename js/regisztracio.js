@@ -30,7 +30,8 @@ document.addEventListener("submit", e=>{
                     return response.json().then(
                         hibasAdat => {
                             const hibaPeldany = new Error()
-                            hibaPeldany.inputExeptions = hibasAdat.exeptions
+                            hibaPeldany.exeptions = hibasAdat.exeptions
+                            hibaPeldany.message = hibasAdat.message
                             throw hibaPeldany
                         }
                     )
@@ -42,12 +43,9 @@ document.addEventListener("submit", e=>{
             location.replace('/')}
         ).catch(
             cougthError =>{
-                if(cougthError.inputExeptions) {
-                    console.log("Ezek a hibák" + cougthError.inputExeptions)
-                }
-                else{
-                    console.log("A szerver vétett hibát vagy hálózati pobléma van.")
-                }
+                
+                    console.log(cougthError.message +"  ||  "+ cougthError.exeptions)
+               
             }
         )
 
