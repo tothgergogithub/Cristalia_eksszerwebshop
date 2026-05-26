@@ -66,7 +66,6 @@ function validateRegistrationData(userInput, regData) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const passwordCheck = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
     let ex = []
-    console.log("passed data: " + data.vezeteknev)
 
     let exeptionCodes = {
         invalidPassword: 1,
@@ -76,66 +75,70 @@ function validateRegistrationData(userInput, regData) {
         onlyNumbersInPhone: 5,
         lastnameToLong: 6,
         firstNameToLong: 7,
-        userAlredyExists:10
+        userAlredyExists: 10
     }
     let currentRegistrationExistanceCheck = regData.find(user => user.email == userInput.email)
-    if (!currentRegistrationExistanceCheck){
-        if (data.vezeteknev.length > 20) {
+    if (!currentRegistrationExistanceCheck) {
+
+        if (userInput.vezeteknev.length > 20) {
             ex.push(exeptionCodes.lastnameToLong)
         }
-        if (data.keresztnev.length > 20) {
+        if (userInput.keresztnev.length > 20) {
             ex.push(exeptionCodes.firstNameToLong)
         }
-    
-        if (!emailRegex.test(data.email)) {
+
+        if (!emailRegex.test(userInput.email)) {
             ex.push(exeptionCodes.invalidEmail)
         }
-    
-        if (!/^\d+$/.test(data.telefon)) {
+
+        if (!/^\d+$/.test(userInput.telefon)) {
             ex.push(exeptionCodes.onlyNumbersInPhone)
-    
-    
+
+
         }
-        if (data.telefon.length < 11 || data.telefon.length > 13) {
+        if (userInput.telefon.length < 11 || userInput.telefon.length > 13) {
             ex.push(exeptionCodes.invalidPhoneLength)
         }
-    
-        if (!passwordCheck.test(data.jelszo)) {
+
+        if (!passwordCheck.test(userInput.jelszo)) {
             ex.push(exeptionCodes.invalidPassword)
         }
-        if (data.jelszo !== data.jelszoismet) {
+        if (userInput.jelszo !== userInput.jelszoismet) {
             ex.push(exeptionCodes.passwordsDontMatch)
         }
     }
+
+
     else {
         ex.push(exeptionCodes.userAlredyExists)
     }
     return ex
 }
 app.post('/register', (req, res) => {
-    let data = req.body
+    const formData = req.body
     let exeptions = []
     let regJson
     let regObj
     try {
         regJson = fs.readFileSync(REG_FILE)
         regObj = JSON.parse(regJson)
-        exeptions = validateRegistrationData(data, regObj)
-        
+        console.log("Itt a hiba")
+        exeptions = validateRegistrationData(formData, regObj)
+
     } catch (serverEx) {
-        return res.status(500).json({message:"A szerveren hiba történt a regisztrációs fájl elérésével vagy az adat validációval", exeptions:serverEx})
+        return res.status(500).json({ message: "A szerveren hiba történt a regisztrációs fájl elérésével vagy az adat validációval", exeptions: serverEx.message })
     }
 
     if (exeptions.length == 0) {
         try {
-            
+
             let userData = {
                 id: regObj.length + 1,
-                vezeteknev: data.vezeteknev,
-                keresztnev: data.keresznev,
-                email: data.email,
-                telefon: data.telefon,
-                jelszo: data.jelszo
+                vezeteknev: formData.vezeteknev,
+                keresztnev: formData.keresznev,
+                email: formData.email,
+                telefon: formData.telefon,
+                jelszo: formData.jelszo
             }
             regObj.push(userData)
             fs.writeFileSync(REG_FILE, JSON.stringify(regObj))
@@ -146,13 +149,13 @@ app.post('/register', (req, res) => {
             return res.status(201).json({ message: "Sikeres regisztráció!" })
         } catch (exeptions) {
             console.log("Ez nem stimmel: " + exeptions)
-            return res.status(500).json({ message: "Sajnos a szerver nem érzi jól magát.", exeptions:serverEx })
+            return res.status(500).json({ message: "Sajnos a szerver nem érzi jól magát.", exeptions: serverEx.message })
         }
 
 
     }
     else {
-        return res.status(400).json({ exeptions })
+        return res.status(400).json({ message: "Nem megfelelő regisztációs adat", exeptions })
     }
 
 
@@ -162,15 +165,15 @@ function validateLoginData(data, users) {
     let ex = []
     let loginErrorCodes = {
         userNotFound: 8,
-        invalidPassword:9
+        invalidPassword: 9
     }
-    
+
     let searchUser = users.find(u => u.email === data.username)
-    if(!searchUser){
+    if (!searchUser) {
         ex.push(loginErrorCodes.userNotFound)
     }
-    else{
-        if(searchUser.jelszo !== data.password){
+    else {
+        if (searchUser.jelszo !== data.password) {
             ex.push(loginErrorCodes.invalidPassword)
         }
     }
@@ -197,7 +200,7 @@ app.post('/login', (req, res) => {
         regJson = fs.readFileSync(REG_FILE)
         console.log("sucsessful filered")
     } catch (e) {
-        return res.status(500).json({ message: "Sikertelen fájlbeolvasás", e })
+        return res.status(500).json({ message: "Sikertelen fájlbeolvasás: ", exeptions:e.message })
     }
     const userObject = JSON.parse(regJson)
     let exeptions = []
@@ -215,11 +218,11 @@ app.post('/login', (req, res) => {
             return res.status(200).json({ message: "Sikeres bejelentkezés" })
 
         } catch (e) {
-            return res.status(500).json({ message: "A szerver nem érzi jól magát", e })
+            return res.status(500).json({ message: "A szerver nem érzi jól magát", exeptions:e.message })
         }
     }
     else {
-        return res.status(400).json({ exeptions })
+        return res.status(400).json({message:"Ezek a hibák: ", exeptions })
     }
 
 
