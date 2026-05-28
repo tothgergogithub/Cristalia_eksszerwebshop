@@ -19,5 +19,12 @@
         "email": "bro@gmail.com",
         "telefon": "21345231763",
         "jelszo": "HaHaHa_1234!"
+    },
+    {
+        "id": 4,
+        "vezeteknev": "asd",
+        "email": "huba@gmail.com",
+        "telefon": "123321123321",
+        "jelszo": "asdASD@123"
     }
 ]
