@@ -12,6 +12,8 @@ function redRegisterFields() {
 
 }
 
+
+
 document.addEventListener("submit", e => {
     e.preventDefault()
     const fields = redRegisterFields()
