@@ -190,7 +190,7 @@ function getUserEmail(data, users) {
     let searchUser = users.find(u => u.email === data.username)
     console.log("get user email" + searchUser.email)
     return searchUser.email
-}
+} 
 
 app.post('/login', (req, res) => {
 
